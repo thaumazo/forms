@@ -1,0 +1,41 @@
+import Grid from '@mui/material/Grid';
+
+import Form from "Form";
+import TextField from "TextField"
+import Checkbox from "Checkbox"
+import Select from "Select"
+import Radio from "Radio"
+import Submit from 'Submit';
+
+const options = [
+  ['first', 'First'],
+  ['second', 'Second'],
+  ['third', 'Third'],
+]
+
+const initial = {
+  checkbox: true,
+  radio: "second",
+}
+
+export default function ManualForm() {
+  return (
+    <Form values={ initial }>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <TextField name="required" label="This field is required" required />
+        </Grid>
+        <Grid item xs={12}>
+          <Checkbox name="checkbox" label="Checkbox" />
+        </Grid>
+        <Grid item xs={12}> 
+          <Select name="select" label="Choose" options={ options }/>
+        </Grid>
+        <Grid item xs={12}>
+          <Radio name="radio" label="Radio" options={ options }/>
+        </Grid>
+      </Grid>
+      <Submit />
+    </Form>
+  )
+}

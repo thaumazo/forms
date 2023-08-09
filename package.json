@@ -1,0 +1,27 @@
+{
+  "name": "@thaumazo/forms",
+  "version": "0.1.0",
+  "description": "An extension of mui forms with additional features",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "author": "Kenneth Spencer",
+  "license": "ISC",
+  "devDependencies": {
+    "next": "^13.2.3"
+  },
+  "peerDependencies": {
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0",
+    "@mui/material": ">=5.8.2"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "react-redux": "^8.0.5",
+    "redux": "^4.2.1"
+  }
+}
