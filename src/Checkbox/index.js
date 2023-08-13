@@ -1,6 +1,6 @@
 import React, {useCallback} from "react";
-import useForm from "useForm";
-import useValue from "useValue";
+import useForm from "../useForm";
+import useValue from "../useValue";
 
 import FormControlLabel from '@mui/material/FormControlLabel';
 import MUICheckbox from '@mui/material/Checkbox';

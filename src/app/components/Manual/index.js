@@ -1,11 +1,6 @@
 import Grid from '@mui/material/Grid';
 
-import Form from "Form";
-import TextField from "TextField"
-import Checkbox from "Checkbox"
-import Select from "Select"
-import Radio from "Radio"
-import Submit from 'Submit';
+import { Form, TextField, Checkbox, Select, Radio, Submit } from "src";
 
 const options = [
   ['first', 'First'],

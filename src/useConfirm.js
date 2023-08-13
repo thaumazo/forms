@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import useForm from "useForm"
+import useForm from "./useForm"
 
 // Restore if running from next.js
 // import Router from 'next/router';

@@ -1,6 +1,6 @@
 import React, {useCallback} from "react";
-import useForm from "useForm"
-import useConfirm from "useConfirm"
+import useForm from "../useForm"
+import useConfirm from "../useConfirm"
 
 export default function Form({
   children,

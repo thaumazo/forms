@@ -1,9 +1,9 @@
 import React, {useCallback, useState, useRef, useEffect} from "react"
 import MUITextField from "@mui/material/TextField"
-import checkValidity from "lib/checkValidity"
+import checkValidity from "../lib/checkValidity"
 // import { makeStyles } from '@mui/material/styles';
-import useForm from "useForm";
-import useValue from "useValue";
+import useForm from "../useForm";
+import useValue from "../useValue";
 
 /*
 const useStyles = makeStyles(theme => ({

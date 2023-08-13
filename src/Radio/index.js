@@ -1,7 +1,7 @@
 import React, {useCallback} from "react";
 
-import useForm from "useForm";
-import useValue from "useValue";
+import useForm from "../useForm";
+import useValue from "../useValue";
 
 
 import FormControl from '@mui/material/FormControl';

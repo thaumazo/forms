@@ -1,9 +1,9 @@
 import {memo, useMemo} from "react"
-import sentenceCase from "utils/sentenceCase"
+import sentenceCase from "../utils/sentenceCase"
 
 import Grid from "@mui/material/Grid"
 import pick from "lodash/pick"
-import TextField from "TextField"
+import TextField from "../TextField"
 
 function Field({field}) {
   const gridProps = pick(field, ['lg', 'md', 'sm', 'xl', 'xs']);

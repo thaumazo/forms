@@ -4,7 +4,6 @@ import Field from "./Field"
 export default function Fields(props) {
   const {fields} = props;
 
-  console.log(fields);
   if (!fields) {
     return null;
   }

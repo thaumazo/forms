@@ -13,3 +13,5 @@ export { default as useForm } from "./useForm";
 export { default as useValue } from "./useValue";
 export { default as useConfirm } from "./useConfirm";
 
+export { default as sentenceCase } from "./utils/sentenceCase";
+

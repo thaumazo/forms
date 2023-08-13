@@ -1,27 +1,41 @@
 {
   "name": "@thaumazo/forms",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "An extension of mui forms with additional features",
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "rollup -c",
+    "build-next": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "author": "Kenneth Spencer",
   "license": "ISC",
   "devDependencies": {
-    "next": "^13.2.3"
+    "@babel/plugin-proposal-export-default-from": "^7.22.5",
+    "@babel/preset-react": "^7.22.5",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-commonjs": "^25.0.4",
+    "@rollup/plugin-node-resolve": "^15.1.0",
+    "@rollup/plugin-replace": "^5.0.2",
+    "next": "^13.2.3",
+    "node-sass": "^9.0.0",
+    "rollup": "^3.28.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-typescript2": "^0.35.0"
   },
   "peerDependencies": {
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
-    "@mui/material": ">=5.8.2"
-  },
-  "dependencies": {
+    "@mui/material": ">=5.8.2",
     "lodash": "^4.17.21",
     "react-redux": "^8.0.5",
     "redux": "^4.2.1"
-  }
+  },
+  "dependencies": {
+  },
+  "module": "./dist/index.js",
+  "type": "module"
 }
