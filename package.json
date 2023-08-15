@@ -1,6 +1,6 @@
 {
   "name": "@thaumazo/forms",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "An extension of mui forms with additional features",
   "main": "index.js",
   "scripts": {
@@ -34,8 +34,7 @@
     "react-redux": "^8.0.5",
     "redux": "^4.2.1"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "module": "./dist/index.js",
   "type": "module"
 }
