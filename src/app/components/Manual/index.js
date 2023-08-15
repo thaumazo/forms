@@ -1,6 +1,9 @@
+'use client'
+
 import Grid from '@mui/material/Grid';
 
-import { Form, TextField, Checkbox, Select, Radio, Submit } from "src";
+
+import { ThemeProvider, Form, TextField, Checkbox, Select, Radio, Submit } from "src";
 
 const options = [
   ['first', 'First'],
@@ -15,6 +18,7 @@ const initial = {
 
 export default function ManualForm() {
   return (
+    <ThemeProvider>
     <Form values={ initial }>
       <Grid container spacing={2}>
         <Grid item xs={12}>
@@ -32,5 +36,6 @@ export default function ManualForm() {
       </Grid>
       <Submit />
     </Form>
+    </ThemeProvider>
   )
 }

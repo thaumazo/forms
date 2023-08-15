@@ -28,7 +28,11 @@ export default {
     postcss(),
     babel({
        babelHelpers: 'bundled',
-       presets: ['@babel/preset-react'],
+       "presets": [
+         ["@babel/preset-react", {
+           "runtime": "automatic"
+         }]
+       ],
        extensions: ['.js'],
        plugins: [
         "@babel/plugin-proposal-export-default-from"
@@ -45,7 +49,9 @@ export default {
     'react-redux',
     'react-router',
     'react-router-dom',
-    'redux'
+    'redux',
+    'react-is', 
+    'react/jsx-runtime',
   ]
 };
 

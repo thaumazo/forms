@@ -5,7 +5,7 @@ import useValue from "../useValue";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import MUICheckbox from '@mui/material/Checkbox';
 
-export default function Radio({name, label}) {
+export default function Checkbox({name, label}) {
   const {setValue} = useForm();
   const value = useValue(name);
   const handleChange = useCallback((evt) => {

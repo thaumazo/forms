@@ -1,4 +1,6 @@
-import Layout from "../../../Layout"
+'use client'
+
+import { ThemeProvider, Layout } from "src"
 
 const fields = [
   {
@@ -15,5 +17,9 @@ const fields = [
 
 
 export default function AutomaticLayout() {
-  return <Layout fields={ fields }/>;
+  return (
+    <ThemeProvider>
+      <Layout fields={ fields }/>
+    </ThemeProvider>
+  )
 }
