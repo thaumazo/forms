@@ -5,6 +5,7 @@ import checkValidity from "../lib/checkValidity"
 import useForm from "../useForm";
 import useValue from "../useValue";
 
+import sentenceCase from "../utils/sentenceCase"
 /*
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,8 +21,16 @@ const useStyles = makeStyles(theme => ({
 }));
 */
 
-export default function TextField(props) {
+export default function TextField({
+  label,
+  ...props
+}) {
   const {name, select} = props;
+
+  if (label === undefined) {
+    label = sentenceCase(name);
+  }
+
   const {invalid, submitted, setValue} = useForm();
   const value = useValue(name)
   const [error, setError] = useState(null);
@@ -69,6 +78,7 @@ export default function TextField(props) {
   return (
     <MUITextField
       value={value || ""}
+      label={ label }
       {...props}
       {...helperProps}
       onBlur={handleBlur}

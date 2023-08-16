@@ -18,7 +18,7 @@ const initial = {
 
 export default function ManualForm() {
   return (
-    <ThemeProvider>
+    <ThemeProvider theme="auto">
     <Form values={ initial }>
       <Grid container spacing={2}>
         <Grid item xs={12}>

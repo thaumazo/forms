@@ -10,6 +10,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import RadioGroup from '@mui/material/RadioGroup';
 import MUIRadio from '@mui/material/Radio';
 
+import sentenceCase from "../utils/sentenceCase"
+
 export default function Radio({
   label, 
   name, 
@@ -17,6 +19,11 @@ export default function Radio({
   disabled, 
   options = [], 
 }) {
+
+  if (label === undefined) {
+    label = sentenceCase(name);
+  }
+
   const {setValue} = useForm();
   const value = useValue(name);
   const handleChange = useCallback((evt) => {

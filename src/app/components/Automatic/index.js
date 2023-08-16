@@ -18,7 +18,7 @@ const fields = [
 
 export default function AutomaticLayout() {
   return (
-    <ThemeProvider>
+    <ThemeProvider theme="auto">
       <Layout fields={ fields }/>
     </ThemeProvider>
   )

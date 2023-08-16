@@ -16,10 +16,20 @@ const lightTheme = createTheme({
 });
 
 
-export default function ThemeProvider({ children }) {
-  const theme = useDarkMode() ? darkTheme : lightTheme
+export default function ThemeProvider({
+  theme = "light", // light | dark | auto
+  children
+}) {
+
+  let chosenTheme = lightTheme;
+  if (theme === "dark") {
+    chosenTheme = darkTheme
+  } else if (theme === 'auto') {
+    chosenTheme = useDarkMode() ? darkTheme : lightTheme
+  }
+
   return (
-    <Provider theme={theme}>
+    <Provider theme={ chosenTheme }>
       <CssBaseline />
         { children }
     </Provider>
