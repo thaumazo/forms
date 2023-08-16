@@ -2,7 +2,7 @@ import useForm from "./useForm";
 
 import Button from '@mui/material/Button';
 
-export default function Submit({ disabled, content="Submit" }) {
+export default function Submit({ disabled, children="Submit" }) {
   const { invalid } = useForm();
 
   return (
@@ -12,7 +12,7 @@ export default function Submit({ disabled, content="Submit" }) {
       size="large"
       disabled={ disabled || invalid }
     >
-      { content }
+      { children }
     </Button>
   )
 }
