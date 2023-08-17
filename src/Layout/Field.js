@@ -1,7 +1,7 @@
 import {memo, useMemo} from "react"
 import sentenceCase from "../utils/sentenceCase"
 
-import Grid from "@mui/material/Grid"
+import { Grid } from "@mui/material"
 import pick from "lodash/pick"
 import TextField from "../TextField"
 

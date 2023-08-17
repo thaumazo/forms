@@ -4,11 +4,7 @@ import useForm from "../useForm";
 import useValue from "../useValue";
 
 
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import RadioGroup from '@mui/material/RadioGroup';
-import MUIRadio from '@mui/material/Radio';
+import { Radio as MUIRadio, RadioGroup, FormControl, FormLabel, FormControlLabel } from '@mui/material';
 
 import sentenceCase from "../utils/sentenceCase"
 

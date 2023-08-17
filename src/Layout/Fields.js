@@ -1,4 +1,4 @@
-import Grid from "@mui/material/Grid"
+import { Grid } from "@mui/material"
 import Field from "./Field"
 
 export default function Fields(props) {

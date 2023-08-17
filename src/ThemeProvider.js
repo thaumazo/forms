@@ -1,5 +1,5 @@
 import { ThemeProvider as Provider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+// import CssBaseline from '@mui/material/CssBaseline';
 
 import useDarkMode from "./useDarkMode"
 
@@ -30,8 +30,7 @@ export default function ThemeProvider({
 
   return (
     <Provider theme={ chosenTheme }>
-      <CssBaseline />
-        { children }
+      { children }
     </Provider>
   );
 }
