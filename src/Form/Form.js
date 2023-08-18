@@ -8,7 +8,8 @@ export default function Form({
   confirm = false,
   ...props
 }) {
-  const {setInvalid, setSubmitted, formRef} = useForm()
+  const context = useForm();
+  const {setInvalid, setSubmitted, formRef} = context;
   const {onSubmit} = props;
   useConfirm(confirm)
 
@@ -29,7 +30,7 @@ export default function Form({
     setInvalid(false)
 
     if (onSubmit) {
-      onSubmit();
+      onSubmit(evt, context);
     }
   }, [formRef, onSubmit, setInvalid, setSubmitted]);
 
