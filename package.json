@@ -1,6 +1,6 @@
 {
   "name": "@thaumazo/forms",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "An extension of mui forms with additional features",
   "main": "index.js",
   "scripts": {
