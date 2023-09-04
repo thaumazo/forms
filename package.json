@@ -17,11 +17,11 @@
     "@babel/preset-react": "^7.22.5",
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-commonjs": "^25.0.4",
-    "@rollup/plugin-node-resolve": "^15.1.0",
+    "@rollup/plugin-node-resolve": "^15.2.1",
     "@rollup/plugin-replace": "^5.0.2",
-    "next": "^13.4.16",
+    "next": "^13.4.19",
     "node-sass": "^9.0.0",
-    "rollup": "^3.28.0",
+    "rollup": "^3.28.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-typescript2": "^0.35.0"
@@ -29,10 +29,8 @@
   "peerDependencies": {
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
-    "@mui/material": "^5.14.5",
-    "lodash": "^4.17.21",
-    "react-redux": "^8.0.5",
-    "redux": "^4.2.1"
+    "@mui/material": "^5.14.7",
+    "lodash": "^4.17.21"
   },
   "module": "./dist/index.js",
   "type": "module"

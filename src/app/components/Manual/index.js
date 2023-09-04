@@ -1,8 +1,8 @@
-
 'use client'
 
-import { Grid } from '@mui/material';
+import { useCallback } from "react"
 
+import { Grid } from '@mui/material';
 
 import { ThemeProvider, Form, TextField, Checkbox, Select, Radio, Submit } from "src";
 
@@ -18,12 +18,24 @@ const initial = {
 }
 
 export default function ManualForm() {
+  const handleSubmit = useCallback((evt, { reset, setSubmitted }) => {
+
+    // Simulate a form submission
+    setTimeout(() => {
+      setSubmitted(false);
+      reset()
+    }, 1000)
+  })
+
   return (
     <ThemeProvider theme="auto">
-      <Form values={ initial }>
+      <Form values={ initial } onSubmit={ handleSubmit }>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField name="required" label="This field is required" required />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField name="email" type="email" required />
           </Grid>
           <Grid item xs={12}>
             <Checkbox name="checkbox" label="Checkbox" />

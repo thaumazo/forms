@@ -10,10 +10,10 @@ export default function Submit({
   ...props
 }) {
 
-  const { invalid } = useForm();
+  const { invalid, submitted } = useForm();
 
   if (disabled === undefined) {
-    disabled = invalid
+    disabled = invalid || submitted
   }
 
   return (

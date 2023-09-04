@@ -1,40 +1,32 @@
-import valueReducer from "./valueReducer"
-import { useState, useCallback, useRef, useMemo } from "react"
-import { createStore } from "redux";
-import { Provider } from "react-redux";
+import { useState, useCallback, useRef, useMemo, useEffect } from "react"
 import FormContext from "./Context"
 
-export default function FormProvider({children, name = "form", id, values: initialValues}) {
+export default function FormProvider({children, id, values: initialValues}) {
   const formRef = useRef()
 
-  const store = useMemo(() => {
-    return createStore(valueReducer, {
-      changes: false,
-      form: initialValues || {}, 
-    })
-    
-  }, [initialValues]);
-
+  const [isChanged, setChanged] = useState(false);
+  const [values, setValues] = useState(initialValues);
   const [invalid, setInvalid] = useState(true);
   const [submitted, setSubmitted] = useState(false);
+ 
+  const init = useCallback((values) => {
+    setValues(values);
+    setChanged(false);
+    setInvalid(true);
+    setSubmitted(false);
+  }, []);
 
-  const isChanged = useCallback(() => {
-    const s = store.getState()
-    return s[name].changed
-  }, [name, store])
+  const reset = useCallback(() => {
+    init(initialValues)
+  }, [initialValues]);
 
-  const setChanged = useCallback((changed) => {
-    store.dispatch({
-      name,
-      type: "set-changed",
-      payload: changed
-    })
-  }, [name, store])
+  useEffect(() => {
+    init(initialValues)
+  }, [initialValues])
 
   const getValues = useCallback(() => {
-    const s = store.getState()
-    return s.form
-  }, [/*name, */ store])
+    return values;
+  }, [values])
 
   const checkValidity = useCallback(() => {
     if (!formRef.current) {
@@ -45,19 +37,36 @@ export default function FormProvider({children, name = "form", id, values: initi
   }, [])
 
   const setValue = useCallback((fieldName, value) => {
-    store.dispatch({
-      name,
-      type: "set-field",
-      payload: {
-        name: fieldName, 
-        value
+    if (values[fieldName] === value) {
+      return;
+    }
+
+    const newValues = {
+      ...values,
+      [fieldName]: value,
+    }
+
+    setValues(newValues);
+    setChanged(true);   
+  }, [values]);
+
+
+  const clear = useCallback(() => {
+    let form  = {...values}
+    for (let key in form) {
+      let val = form[key];
+      if (typeof(val) === "boolean") {
+        form[key] = false;
+      } else {
+        form[key] = ""
       }
-    })
-  }, [name, store]);
+    }
+
+    setValues(values);
+  }, [values]);
 
   const context = useMemo(() => ({
     id,
-    name,
     formRef,
     invalid,
     setInvalid,
@@ -69,13 +78,15 @@ export default function FormProvider({children, name = "form", id, values: initi
     getValues,
     // useValue,
     setValue,
-  }), [id, invalid, submitted, name]) // eslint-disable-line react-hooks/exhaustive-deps
+    values,
+    reset,
+    init,
+    clear,
+  }), [id, invalid, submitted, values]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <Provider store={store}>
-      <FormContext.Provider value={context}>
-        {children}
-      </FormContext.Provider>
-    </Provider>
+    <FormContext.Provider value={context}>
+      {children}
+    </FormContext.Provider>
   )
 }

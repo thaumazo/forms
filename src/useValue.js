@@ -1,6 +1,9 @@
-import get from "lodash/get"
-import { useSelector } from "react-redux";
+import useForm from "./useForm"
 
 export default function useValue(fieldName) {
-  return useSelector(s => get(s, ['form', fieldName]))
+  const { values } = useForm();
+
+  if (values) {
+    return values[fieldName];
+  }
 }

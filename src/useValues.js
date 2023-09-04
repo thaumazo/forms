@@ -1,5 +1,6 @@
-import { useSelector } from "react-redux";
+import useForm from "./useForm"
 
 export default function useValues (/*fieldName*/) {
-    return useSelector(s => s.form);
+  const { values } = useForm();
+  return values;
 }
