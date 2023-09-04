@@ -1,7 +1,8 @@
 import { useState, useCallback, useRef, useMemo, useEffect } from "react"
 import FormContext from "./Context"
 
-export default function FormProvider({children, id, values: initialValues = {}}) {
+const empty = {}
+export default function FormProvider({children, id, values: initialValues = empty}) {
   const formRef = useRef()
 
   const [isChanged, setChanged] = useState(false);
