@@ -32,7 +32,7 @@ export default function Form({
     if (onSubmit) {
       onSubmit(evt, context);
     }
-  }, [formRef, onSubmit, setInvalid, setSubmitted]);
+  }, [context, formRef, onSubmit, setInvalid, setSubmitted]);
 
   const handleChange = useCallback((evt) => {
     const myForm = evt.currentTarget
