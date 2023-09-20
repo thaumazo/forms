@@ -1,4 +1,4 @@
-import startCase from "lodash/startCase"
+import startCase from "lodash/startCase";
 
 export default function sentenceCase(str) {
   if (!str) {
@@ -6,6 +6,6 @@ export default function sentenceCase(str) {
   }
 
   str = startCase(str);
-  str = str.toLowerCase()
-  return str.charAt(0).toUpperCase() + str.slice(1)
+  str = str.toLowerCase();
+  return str.charAt(0).toUpperCase() + str.slice(1);
 }

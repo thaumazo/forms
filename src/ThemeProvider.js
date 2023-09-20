@@ -1,37 +1,31 @@
-import { ThemeProvider as Provider, createTheme } from '@mui/material/styles';
+import { ThemeProvider as Provider, createTheme } from "@mui/material/styles";
 // import CssBaseline from '@mui/material/CssBaseline';
 
-import useDarkMode from "./useDarkMode"
+import useDarkMode from "./useDarkMode";
 
 const darkTheme = createTheme({
   palette: {
-    mode: 'dark',
+    mode: "dark",
   },
 });
 
 const lightTheme = createTheme({
   palette: {
-    mode: 'light',
+    mode: "light",
   },
 });
 
-
 export default function ThemeProvider({
   theme = "light", // light | dark | auto
-  children
+  children,
 }) {
-
-  const useDark = useDarkMode()
+  const useDark = useDarkMode();
   let chosenTheme = lightTheme;
   if (theme === "dark") {
-    chosenTheme = darkTheme
-  } else if (theme === 'auto') {
-    chosenTheme = useDark ? darkTheme : lightTheme
+    chosenTheme = darkTheme;
+  } else if (theme === "auto") {
+    chosenTheme = useDark ? darkTheme : lightTheme;
   }
 
-  return (
-    <Provider theme={ chosenTheme }>
-      { children }
-    </Provider>
-  );
+  return <Provider theme={chosenTheme}>{children}</Provider>;
 }

@@ -1,19 +1,19 @@
-import { useEffect } from "react"
-import useForm from "./useForm"
+import { useEffect } from "react";
+import useForm from "./useForm";
 
 // Restore if running from next.js
 // import Router from 'next/router';
 
 // confirm before leaving.
 export default function useConfirm(confirm = true) {
-  const {isChanged} = useForm();
+  const { isChanged } = useForm();
 
   useEffect(() => {
     if (!confirm) {
       return;
     }
 
-    const message = 'Do you want to leave?';
+    const message = "Do you want to leave?";
     /* // restore this code if running from within next.js
     const routeChangeStart = (url) => {
       if (Router.asPath !== url && isChanged() && !window.confirm(message)) {
@@ -28,7 +28,7 @@ export default function useConfirm(confirm = true) {
     };
     */
 
-    const beforeunload = e => {
+    const beforeunload = (e) => {
       if (isChanged()) {
         e.preventDefault();
         e.returnValue = message;
@@ -40,12 +40,12 @@ export default function useConfirm(confirm = true) {
 
     // Restore if running from next.js
     // Router.events.on('routeChangeStart', routeChangeStart);
-    window.addEventListener('beforeunload', beforeunload);
+    window.addEventListener("beforeunload", beforeunload);
 
     return () => {
       // Restore if running from next.js
       // Router.events.off('routeChangeStart', routeChangeStart);
-      window.removeEventListener('beforeunload', beforeunload);
-    }
-  }, [isChanged, confirm])
+      window.removeEventListener("beforeunload", beforeunload);
+    };
+  }, [isChanged, confirm]);
 }

@@ -1,5 +1,12 @@
-import { useReducer, useState, useCallback, useRef, useMemo, useEffect } from "react"
-import FormContext from "./Context"
+import {
+  useReducer,
+  useState,
+  useCallback,
+  useRef,
+  useMemo,
+  useEffect,
+} from "react";
+import FormContext from "./Context";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -12,105 +19,123 @@ const reducer = (state, action) => {
       const newState = {
         ...state,
         [name]: value,
-      }
+      };
 
       return newState;
-      // setChanged(true);   
-
+      // setChanged(true);
     }
     case "SET": {
       const { values } = action;
       return values;
     }
     case "CLEAR": {
-      let form  = {...state}
+      let form = { ...state };
       for (let key in form) {
         let val = form[key];
-        if (typeof(val) === "boolean") {
+        if (typeof val === "boolean") {
           form[key] = false;
         } else {
-          form[key] = ""
+          form[key] = "";
         }
       }
 
-      return form
+      return form;
     }
     default:
       return state;
   }
 };
 
-const empty = {}
-export default function FormProvider({children, id, values: initialValues = empty}) {
-  const formRef = useRef()
+const empty = {};
+export default function FormProvider({
+  children,
+  id,
+  values: initialValues = empty,
+}) {
+  const formRef = useRef();
 
   const [values, dispatch] = useReducer(reducer, initialValues);
   const [blurred, setBlurred] = useState({});
   const [invalid, setInvalid] = useState(true);
   const [submitted, setSubmitted] = useState(false);
- 
+
   const setValues = useCallback((values) => {
-    dispatch({type: "SET", values});
+    dispatch({ type: "SET", values });
   }, []);
 
-  const init = useCallback((values) => {
-    setValues(values);
-    setBlurred({})
-    // setChanged(false);
-    setInvalid(true);
-    setSubmitted(false);
-  }, [setValues]);
+  const init = useCallback(
+    (values) => {
+      setValues(values);
+      setBlurred({});
+      // setChanged(false);
+      setInvalid(true);
+      setSubmitted(false);
+    },
+    [setValues],
+  );
 
   const reset = useCallback(() => {
-    init(initialValues)
+    init(initialValues);
   }, [initialValues, init]);
 
   useEffect(() => {
-    init(initialValues)
-  }, [initialValues, init])
+    init(initialValues);
+  }, [initialValues, init]);
 
   const checkValidity = useCallback(() => {
     if (!formRef.current) {
-      return false
+      return false;
     }
 
-    return formRef.current.checkValidity()
-  }, [])
-
-  const setValue = useCallback((name, value) => {
-    dispatch({type: "SET_FIELD", name, value});
+    return formRef.current.checkValidity();
   }, []);
 
+  const setValue = useCallback((name, value) => {
+    dispatch({ type: "SET_FIELD", name, value });
+  }, []);
 
   const clear = useCallback(() => {
-    dispatch({type: "CLEAR"});
+    dispatch({ type: "CLEAR" });
   }, []);
 
   const isChanged = values !== initialValues;
 
-  const context = useMemo(() => ({
-    id,
-    formRef,
-    invalid,
-    setInvalid,
-    submitted,
-    setSubmitted,
-    checkValidity,
-    isChanged,
-    // setChanged,
-    // useValue,
-    setValue,
-    values,
-    blurred,
-    setBlurred,
-    reset,
-    init,
-    clear,
-  }), [id, invalid, submitted, values, blurred, checkValidity, clear, init, isChanged, reset, setValue]);
+  const context = useMemo(
+    () => ({
+      id,
+      formRef,
+      invalid,
+      setInvalid,
+      submitted,
+      setSubmitted,
+      checkValidity,
+      isChanged,
+      // setChanged,
+      // useValue,
+      setValue,
+      values,
+      blurred,
+      setBlurred,
+      reset,
+      init,
+      clear,
+    }),
+    [
+      id,
+      invalid,
+      submitted,
+      values,
+      blurred,
+      checkValidity,
+      clear,
+      init,
+      isChanged,
+      reset,
+      setValue,
+    ],
+  );
 
   return (
-    <FormContext.Provider value={context}>
-      {children}
-    </FormContext.Provider>
-  )
+    <FormContext.Provider value={context}>{children}</FormContext.Provider>
+  );
 }

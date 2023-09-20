@@ -1,10 +1,10 @@
 import Provider from "./Provider";
-import Form from "./Form"
+import Form from "./Form";
 
-export default function FormRoot({ values, ...rest}) {
+export default function FormRoot({ values, ...rest }) {
   return (
-    <Provider values={ values }>
+    <Provider values={values}>
       <Form {...rest} />
     </Provider>
-  )
+  );
 }

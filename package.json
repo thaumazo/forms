@@ -8,7 +8,10 @@
     "build": "rollup -c",
     "build-next": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prettier": "npx prettier src --check",
+    "prettier:fix": "npm run prettier -- --write",
+    "format": "npm run prettier:fix && npm run lint -- --fix"
   },
   "author": "Kenneth Spencer",
   "license": "ISC",
@@ -24,6 +27,7 @@
     "eslint-config-prettier": "^9.0.0",
     "next": "^13.5.2",
     "node-sass": "^9.0.0",
+    "prettier": "^3.0.3",
     "rollup": "^3.29.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",

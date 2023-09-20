@@ -1,11 +1,11 @@
-import { Grid } from '@mui/material';
+import { Grid } from "@mui/material";
 
-import Group from "./Group"
-import Fields from "./Fields"
+import Group from "./Group";
+import Fields from "./Fields";
 import Form from "../Form";
 
 export default function FormLayout(props) {
-  const {groups = [], fields=[]} = props
+  const { groups = [], fields = [] } = props;
 
   /*
   const fieldsGrouped = useMemo(() => fields.reduce((acc, field) => {
@@ -21,15 +21,11 @@ export default function FormLayout(props) {
   return (
     <Form>
       <Grid container>
-        {Array.from(groups.values()).map(group => (
-          <Group
-            key={group.name}
-            group={group}
-            fields={group.fields}
-          />
+        {Array.from(groups.values()).map((group) => (
+          <Group key={group.name} group={group} fields={group.fields} />
         ))}
-        <Fields fields={ fields } />
+        <Fields fields={fields} />
       </Grid>
     </Form>
-  )
+  );
 }

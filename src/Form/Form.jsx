@@ -1,6 +1,6 @@
-import React, {useCallback} from "react";
-import useForm from "../useForm"
-import useConfirm from "../useConfirm"
+import React, { useCallback } from "react";
+import useForm from "../useForm";
+import useConfirm from "../useConfirm";
 
 export default function Form({
   children,
@@ -9,41 +9,50 @@ export default function Form({
   ...props
 }) {
   const context = useForm();
-  const {setInvalid, setSubmitted, formRef} = context;
-  const {onSubmit} = props;
-  useConfirm(confirm)
+  const { setInvalid, setSubmitted, formRef } = context;
+  const { onSubmit } = props;
+  useConfirm(confirm);
 
-  const handleSubmit = useCallback((evt) => {
-    const myForm = evt.currentTarget
-    setSubmitted(true)
-    evt.preventDefault();
-    if (!myForm.checkValidity()) {
-      // setInvalid(true)
+  const handleSubmit = useCallback(
+    (evt) => {
+      const myForm = evt.currentTarget;
+      setSubmitted(true);
+      evt.preventDefault();
+      if (!myForm.checkValidity()) {
+        // setInvalid(true)
 
-      const input = formRef.current.querySelector(":invalid");
-      if (input) {
-        input.focus();
+        const input = formRef.current.querySelector(":invalid");
+        if (input) {
+          input.focus();
+        }
+
+        return;
       }
+      setInvalid(false);
 
-      return;
-    }
-    setInvalid(false)
+      if (onSubmit) {
+        onSubmit(evt, context);
+      }
+    },
+    [context, formRef, onSubmit, setInvalid, setSubmitted],
+  );
 
-    if (onSubmit) {
-      onSubmit(evt, context);
-    }
-  }, [context, formRef, onSubmit, setInvalid, setSubmitted]);
-
-  const handleChange = useCallback((evt) => {
-    const myForm = evt.currentTarget
-    setInvalid(!myForm.checkValidity())
-  }, [setInvalid]);
+  const handleChange = useCallback(
+    (evt) => {
+      const myForm = evt.currentTarget;
+      setInvalid(!myForm.checkValidity());
+    },
+    [setInvalid],
+  );
 
   // block native form validation UX
-  const handleInvalid = useCallback((evt) => {
-    evt.preventDefault()
-    setInvalid(true)
-  }, [setInvalid]);
+  const handleInvalid = useCallback(
+    (evt) => {
+      evt.preventDefault();
+      setInvalid(true);
+    },
+    [setInvalid],
+  );
 
   return (
     <form
@@ -57,5 +66,5 @@ export default function Form({
     >
       {children}
     </form>
-  )
+  );
 }

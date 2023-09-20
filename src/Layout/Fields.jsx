@@ -1,8 +1,8 @@
-import { Grid } from "@mui/material"
-import Field from "./Field"
+import { Grid } from "@mui/material";
+import Field from "./Field";
 
 export default function Fields(props) {
-  const {fields} = props;
+  const { fields } = props;
 
   if (!fields) {
     return null;
@@ -12,12 +12,9 @@ export default function Fields(props) {
 
   return (
     <Grid container spacing={2}>
-      {fieldList.map(field => (
-        <Field
-          key={field.name}
-          field={field}
-        />
+      {fieldList.map((field) => (
+        <Field key={field.name} field={field} />
       ))}
     </Grid>
-  )
+  );
 }
