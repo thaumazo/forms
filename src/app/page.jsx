@@ -6,10 +6,12 @@ import AutomaticForm from "./components/Automatic"
 export default function Home() {
   return (
     <main className={styles.main}>
-      <h1> Manual layout </h1>
-      <ManualForm />
-      <h1> Automatic layout </h1>
-      <AutomaticForm />
+      <div className={ styles.container }>
+        <h2 className={ styles.h1 }> Manual layout </h2>
+        <ManualForm />
+        <h2 className={ styles.h1 }> Automatic layout </h2>
+        <AutomaticForm />
+      </div>
     </main>
   )
 }

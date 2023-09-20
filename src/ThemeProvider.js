@@ -21,11 +21,12 @@ export default function ThemeProvider({
   children
 }) {
 
+  const useDark = useDarkMode()
   let chosenTheme = lightTheme;
   if (theme === "dark") {
     chosenTheme = darkTheme
   } else if (theme === 'auto') {
-    chosenTheme = useDarkMode() ? darkTheme : lightTheme
+    chosenTheme = useDark ? darkTheme : lightTheme
   }
 
   return (

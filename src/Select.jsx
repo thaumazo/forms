@@ -1,7 +1,7 @@
 import React from "react";
 
-import { MenuItem }from '@mui/material';
-import TextField from "../TextField"
+import MenuItem from '@mui/material/MenuItem';
+import TextField from "./TextField"
 
 export default function Select(props) {
   const {options = [], ...rest} = props;

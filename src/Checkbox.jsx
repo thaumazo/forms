@@ -1,15 +1,15 @@
 import React, {useCallback} from "react";
-import useForm from "../useForm";
-import useValue from "../useValue";
+import useValue from "./useValue";
 
-import {Checkbox as MUICheckbox, FormControlLabel } from '@mui/material';
+import MUICheckbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 export default function Checkbox({name, label}) {
-  const {setValue} = useForm();
-  const value = useValue(name);
+  const [value, setValue] = useValue(name);
+
   const handleChange = useCallback((evt) => {
-    setValue(name, evt.target.checked);
-  }, [name, setValue]);
+    setValue(evt.target.checked);
+  }, [setValue]);
   
   return (
     <FormControlLabel
