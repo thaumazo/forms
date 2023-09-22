@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
-    "build": "rollup -c",
-    "build-next": "next build",
+    "rollup": "rollup -c",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "prettier": "npx prettier src --check",

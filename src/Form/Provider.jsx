@@ -58,6 +58,7 @@ export default function FormProvider({
   const [blurred, setBlurred] = useState({});
   const [invalid, setInvalid] = useState(true);
   const [submitted, setSubmitted] = useState(false);
+  const [toggleRender, setToggleRender] = useState(false);
 
   const setValues = useCallback((values) => {
     dispatch({ type: "SET", values });
@@ -98,6 +99,11 @@ export default function FormProvider({
     dispatch({ type: "CLEAR" });
   }, []);
 
+  // force the form to render so that side effects can be picked up on.
+  const renderForm = useCallback(() => {
+    setToggleRender(toggleRender === true ? false : true);
+  }, [toggleRender, setToggleRender]);
+
   const isChanged = values !== initialValues;
 
   const context = useMemo(
@@ -119,6 +125,7 @@ export default function FormProvider({
       reset,
       init,
       clear,
+      renderForm,
     }),
     [
       id,
@@ -132,6 +139,7 @@ export default function FormProvider({
       isChanged,
       reset,
       setValue,
+      renderForm,
     ],
   );
 

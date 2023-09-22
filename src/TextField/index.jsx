@@ -4,6 +4,7 @@ import React, {
   useState,
   useRef,
   forwardRef,
+  useEffect,
 } from "react";
 
 import isEmail from "validator/lib/isEmail";
@@ -83,12 +84,14 @@ const TextField = forwardRef(
           }
         }
 
+        /*
         if ((blur || submitted) && !select) {
           const err = checkValidity(input, message);
           setError(err);
         }
+      */
       },
-      [setValue, blur, submitted, message, onChange, select, type],
+      [setValue, /* blur, submitted, select, */ message, onChange, type],
     );
 
     const handleBlur = useCallback(
@@ -104,12 +107,30 @@ const TextField = forwardRef(
       [onBlur, select, message, setBlur],
     );
 
-    // The form was submitted and had an error somehwere. Display it if wehaveone
-    /*
-  useEffect(() => {
- 
-  }, [error, value, blur, invalid, submitted, inputRef, select, message, type]);
-*/
+    const validationMessage = inputRef?.current?.validationMessage;
+
+    const initialRender = useRef;
+
+    useEffect(() => {
+      if (!initialRender.current) {
+        initialRender.current = true;
+        return;
+      }
+
+      const input = inputRef.current;
+      if ((blur || submitted) && !select) {
+        const err = checkValidity(input, message);
+        setError(err);
+      }
+    }, [
+      inputRef,
+      select,
+      blur,
+      submitted,
+      validationMessage,
+      initialRender,
+      message,
+    ]);
 
     let helperProps = {};
     if (error) {
