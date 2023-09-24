@@ -14,7 +14,7 @@ import {
   Select,
   Radio,
   Submit,
-} from "src";
+} from "/src";
 
 const options = [
   ["first", "First"],

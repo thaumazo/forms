@@ -7,7 +7,7 @@ import React, {
   useEffect,
 } from "react";
 
-import isEmail from "validator/lib/isEmail";
+import isEmail from "validator/es/lib/isEmail";
 
 import Field from "./Field";
 import checkValidity from "../lib/checkValidity";

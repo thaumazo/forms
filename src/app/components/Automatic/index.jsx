@@ -1,6 +1,6 @@
 "use client";
 
-import { ThemeProvider, Layout } from "src";
+import { ThemeProvider, Layout } from "/src";
 
 const fields = [
   {
