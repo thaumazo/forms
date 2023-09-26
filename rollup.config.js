@@ -12,7 +12,7 @@ import replace from "@rollup/plugin-replace";
 import packageJson from "./package.json" assert { type: "json" };
 
 export default {
-  input: "src/index.js",
+  input: "src/index.jsx",
   output: [
     {
       file: packageJson.module,

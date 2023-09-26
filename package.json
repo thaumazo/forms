@@ -2,7 +2,7 @@
   "name": "@thaumazo/forms",
   "version": "0.2.1",
   "description": "An extension of mui forms with additional features",
-  "main": "index.js",
+  "main": "index.jsx",
   "scripts": {
     "dev": "next dev",
     "rollup": "rollup -c",
@@ -41,7 +41,7 @@
     "@mui/material": "^5.14.10",
     "lodash": "^4.17.21"
   },
-  "module": "./dist/index.js",
+  "module": "./dist/index.jsx",
   "type": "module",
   "dependencies": {
     "@babel/preset-env": "^7.22.20",
