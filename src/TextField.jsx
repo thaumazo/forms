@@ -9,14 +9,16 @@ import React, {
 
 import isEmail from "validator/es/lib/isEmail";
 
-import Field from "./Field";
-import checkValidity from "../lib/checkValidity";
-// import { makeStyles } from '@mui/material/styles';
-import useForm from "../useForm";
-import useValue from "../useValue";
-import useBlur from "../useBlur";
+// import Field from "./Field";
+import TextFieldMUI from "@mui/material/TextField";
 
-import sentenceCase from "../utils/sentenceCase";
+import checkValidity from "./lib/checkValidity";
+// import { makeStyles } from '@mui/material/styles';
+import useForm from "./useForm";
+import useValue from "./useValue";
+import useBlur from "./useBlur";
+
+import sentenceCase from "./utils/sentenceCase";
 /*
 const useStyles = makeStyles(theme => ({
   root: {
@@ -144,7 +146,7 @@ const TextField = forwardRef(
     }
 
     return (
-      <Field
+      <TextFieldMUI
         value={value || ""}
         label={label}
         {...props}
