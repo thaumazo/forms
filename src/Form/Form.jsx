@@ -17,8 +17,8 @@ export default function Form({
     (evt) => {
       const myForm = evt.currentTarget;
       setSubmitted(true);
-      evt.preventDefault();
       if (!myForm.checkValidity()) {
+        evt.preventDefault();
         // setInvalid(true)
 
         const input = formRef.current.querySelector(":invalid");
@@ -32,7 +32,7 @@ export default function Form({
 
       if (onSubmit) {
         onSubmit(evt, context);
-      }
+      } 
     },
     [context, formRef, onSubmit, setInvalid, setSubmitted],
   );
