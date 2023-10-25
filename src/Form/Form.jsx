@@ -4,7 +4,6 @@ import useConfirm from "../useConfirm";
 
 export default function Form({
   children,
-  method = "post",
   confirm = false,
   ...props
 }) {
