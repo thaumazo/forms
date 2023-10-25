@@ -57,7 +57,6 @@ export default function Form({
     <form
       noValidate
       ref={formRef}
-      method={method}
       {...props}
       onSubmit={handleSubmit}
       onChange={handleChange}
