@@ -1,6 +1,15 @@
 import { useContext } from "react";
-import FormContext from "./Form/Context";
+import FormContext from "./Context";
 
 export default function useForm() {
-  return useContext(FormContext);
+  const context = useContext(FormContext);
+
+  const keys = Object.keys(context);
+  if (!keys.length) {
+    throw Error(
+      "Unable to fetch form context. Please ensure that the form is wrapped with the <Provider>",
+    );
+  }
+
+  return context;
 }

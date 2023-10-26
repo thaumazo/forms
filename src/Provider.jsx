@@ -1,5 +1,4 @@
 import {
-  useReducer,
   useState,
   useCallback,
   useRef,
@@ -8,6 +7,7 @@ import {
 } from "react";
 import FormContext from "./Context";
 
+/*
 const reducer = (state, action) => {
   switch (action.type) {
     case "SET_FIELD": {
@@ -45,34 +45,36 @@ const reducer = (state, action) => {
       return state;
   }
 };
+*/
 
 const empty = {};
 export default function FormProvider({
   children,
   id,
   values: initialValues = empty,
+  controlled = false, //whether or not the form components are controlled
 }) {
   const formRef = useRef();
 
-  const [values, dispatch] = useReducer(reducer, initialValues);
+  const [values, setValues] = useState(controlled ? initialValues : {});
   const [blurred, setBlurred] = useState({});
   const [invalid, setInvalid] = useState(true);
   const [submitted, setSubmitted] = useState(false);
   const [toggleRender, setToggleRender] = useState(false);
 
-  const setValues = useCallback((values) => {
-    dispatch({ type: "SET", values });
-  }, []);
-
   const init = useCallback(
     (values) => {
-      setValues(values);
+      if (controlled) {
+        setValues(values);
+      } else {
+        formRef.current.reset();
+      }
       setBlurred({});
       // setChanged(false);
       setInvalid(true);
       setSubmitted(false);
     },
-    [setValues],
+    [setValues, controlled, formRef],
   );
 
   const reset = useCallback(() => {
@@ -91,13 +93,35 @@ export default function FormProvider({
     return formRef.current.checkValidity();
   }, []);
 
-  const setValue = useCallback((name, value) => {
-    dispatch({ type: "SET_FIELD", name, value });
-  }, []);
+  const setValue = useCallback(
+    (name, value) => {
+      const newValues = { ...values };
+      newValues[name] = value;
+      setValues(newValues);
+      //dispatch({ type: "SET_FIELD", name, value });
+    },
+    [values, setValues],
+  );
 
   const clear = useCallback(() => {
-    dispatch({ type: "CLEAR" });
-  }, []);
+    // dispatch({ type: "CLEAR" });
+    if (!controlled) {
+      formRef.current.clear();
+      return;
+    }
+    let form = { ...values };
+
+    for (let key in form) {
+      let val = form[key];
+      if (typeof val === "boolean") {
+        form[key] = false;
+      } else {
+        form[key] = "";
+      }
+    }
+
+    setValues(form);
+  }, [controlled, values, setValues]);
 
   // force the form to render so that side effects can be picked up on.
   const renderForm = useCallback(() => {
@@ -126,6 +150,8 @@ export default function FormProvider({
       init,
       clear,
       renderForm,
+      controlled,
+      initialValues,
     }),
     [
       id,
@@ -140,6 +166,8 @@ export default function FormProvider({
       reset,
       setValue,
       renderForm,
+      controlled,
+      initialValues,
     ],
   );
 

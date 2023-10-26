@@ -1,6 +1,6 @@
 "use client";
 
-import { ThemeProvider, Layout } from "/src";
+import { ThemeProvider, Provider, Layout } from "/src";
 
 const fields = [
   {
@@ -18,7 +18,9 @@ const fields = [
 export default function AutomaticLayout() {
   return (
     <ThemeProvider theme="auto">
-      <Layout fields={fields} />
+      <Provider>
+        <Layout fields={fields} />
+      </Provider>
     </ThemeProvider>
   );
 }

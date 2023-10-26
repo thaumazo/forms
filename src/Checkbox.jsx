@@ -18,7 +18,7 @@ export default function Checkbox({ name, label }) {
     <FormControlLabel
       control={
         <MUICheckbox
-          checked={value}
+          checked={value || false}
           onChange={handleChange}
           name={name}
           color="primary"

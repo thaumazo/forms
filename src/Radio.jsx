@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+import useForm from "./useForm";
 
 import useValue from "./useValue";
 
@@ -17,6 +18,8 @@ export default function Radio({
   disabled,
   options = [],
 }) {
+  const { initialValues, controlled } = useForm();
+
   if (label === undefined) {
     label = sentenceCase(name);
   }
@@ -29,10 +32,21 @@ export default function Radio({
     [setValue],
   );
 
+  const groupProps = {};
+
+  if (controlled) {
+    groupProps.value = value || "";
+    groupProps.onChange = handleChange;
+  }
+
+  if (name) {
+    groupProps.defaultValue = initialValues[name] || "";
+  }
+
   return (
     <FormControl component="fieldset">
       <FormLabel component="legend">{label}</FormLabel>
-      <RadioGroup row={row} name={name} value={value} onChange={handleChange}>
+      <RadioGroup row={row} name={name} {...groupProps}>
         {options.map(([_value, _label]) => {
           return (
             <FormControlLabel

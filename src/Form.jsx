@@ -1,12 +1,8 @@
 import React, { useCallback } from "react";
-import useForm from "../useForm";
-import useConfirm from "../useConfirm";
+import useForm from "./useForm";
+import useConfirm from "./useConfirm";
 
-export default function Form({
-  children,
-  confirm = false,
-  ...props
-}) {
+export default function Form({ children, confirm = false, ...props }) {
   const context = useForm();
   const { setInvalid, setSubmitted, formRef } = context;
   const { onSubmit } = props;
@@ -31,7 +27,7 @@ export default function Form({
 
       if (onSubmit) {
         onSubmit(evt, context);
-      } 
+      }
     },
     [context, formRef, onSubmit, setInvalid, setSubmitted],
   );
