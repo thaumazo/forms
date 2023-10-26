@@ -1,4 +1,5 @@
 import {
+  useReducer,
   useState,
   useCallback,
   useRef,
@@ -6,6 +7,18 @@ import {
   useEffect,
 } from "react";
 import FormContext from "./Context";
+
+const noticeReducer = (state, {type, message}) => {
+  const retval = {
+    error: "",
+    success: "",
+  }
+
+  retval[type] = message;
+
+  console.log(retval);
+  return retval;
+}
 
 /*
 const reducer = (state, action) => {
@@ -56,11 +69,21 @@ export default function FormProvider({
 }) {
   const formRef = useRef();
 
+  const [ notices, dispatchNotice ] = useReducer(noticeReducer, {error: "", success: ""});
+
   const [values, setValues] = useState(controlled ? initialValues : {});
   const [blurred, setBlurred] = useState({});
   const [invalid, setInvalid] = useState(true);
   const [submitted, setSubmitted] = useState(false);
   const [toggleRender, setToggleRender] = useState(false);
+
+  const setError = useCallback((message) =>  {
+    dispatchNotice({ type: "error", message});
+  }, [dispatchNotice]);
+
+  const setSuccess = useCallback((message) =>  {
+    dispatchNotice({ type: "success", message});
+  }, [dispatchNotice]);
 
   const init = useCallback(
     (values) => {
@@ -152,6 +175,10 @@ export default function FormProvider({
       renderForm,
       controlled,
       initialValues,
+      setSuccess,
+      setError,
+      error: notices.error,
+      success: notices.success,
     }),
     [
       id,
@@ -168,6 +195,9 @@ export default function FormProvider({
       renderForm,
       controlled,
       initialValues,
+      notices,
+      setError,
+      setSuccess,
     ],
   );
 

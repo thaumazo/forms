@@ -15,6 +15,7 @@ import {
   Select,
   Radio,
   Submit,
+  Notice,
 } from "/src";
 
 const options = [
@@ -29,9 +30,12 @@ const initial = {
 };
 
 export default function ManualForm() {
-  const handleSubmit = useCallback((evt, { reset, setSubmitted }) => {
+  const handleSubmit = useCallback((evt, { reset, setSubmitted, setSuccess }) => {
     // Simulate a form submission
+    evt.preventDefault();
     setTimeout(() => {
+      console.log("set success");
+      setSuccess("Your form has been successfully submitted");
       setSubmitted(false);
       reset();
     }, 1000);
@@ -42,6 +46,9 @@ export default function ManualForm() {
       <Provider>
         <Form values={initial} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Notice />
+            </Grid>
             <Grid item xs={12}>
               <TextField
                 name="required"
