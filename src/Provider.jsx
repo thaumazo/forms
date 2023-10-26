@@ -16,7 +16,6 @@ const noticeReducer = (state, {type, message}) => {
 
   retval[type] = message;
 
-  console.log(retval);
   return retval;
 }
 
