@@ -54,6 +54,7 @@ export default {
   ],
   external: [
     "react",
+    "react-dom",
     "react-redux",
     "react-router",
     "react-router-dom",
