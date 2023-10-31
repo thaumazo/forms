@@ -1,18 +1,21 @@
 import useForm from "./useForm";
 
 import { Button } from "@mui/material";
+import { useFormStatus } from "react-dom";
 
 export default function Submit({
   disabled,
+  mode = "nonde", // valid | none
   variant = "contained",
   size = "large",
   children = "Submit",
   ...props
 }) {
-  const { invalid, submitted } = useForm();
+  const { invalid } = useForm();
+  const { pending } = useFormStatus();
 
-  if (disabled === undefined) {
-    disabled = invalid || submitted;
+  if (mode === "valid") {
+    disabled = invalid;
   }
 
   return (
@@ -20,7 +23,7 @@ export default function Submit({
       type="submit"
       variant={variant}
       size={size}
-      disabled={disabled}
+      disabled={pending || disabled}
       {...props}
     >
       {children}

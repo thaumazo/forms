@@ -1,3 +1,5 @@
+"use client";
+
 import useForm from "./useForm";
 
 export default function useValues() {

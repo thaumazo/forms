@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useCallback, forwardRef } from "react";
 import TextField from "./TextField";
 import IconButton from "@mui/material/IconButton";
@@ -26,6 +28,7 @@ const Password = forwardRef(
       endAdornment: (
         <InputAdornment position="end">
           <IconButton
+            size="medium"
             tabIndex={-1}
             aria-label="toggle password visibility"
             onClick={handleClickShowPassword}

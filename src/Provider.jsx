@@ -1,102 +1,48 @@
+"use client";
+
 import {
-  useReducer,
+  // useReducer,
   useState,
   useCallback,
   useRef,
   useMemo,
   useEffect,
 } from "react";
+import { useFormState } from "react-dom";
+
 import FormContext from "./Context";
-
-const noticeReducer = (state, {type, message}) => {
-  const retval = {
-    error: "",
-    success: "",
-  }
-
-  retval[type] = message;
-
-  return retval;
-}
-
-/*
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "SET_FIELD": {
-      const { name, value } = action;
-      if (state[name] === value) {
-        return state;
-      }
-
-      const newState = {
-        ...state,
-        [name]: value,
-      };
-
-      return newState;
-      // setChanged(true);
-    }
-    case "SET": {
-      const { values } = action;
-      return values;
-    }
-    case "CLEAR": {
-      let form = { ...state };
-      for (let key in form) {
-        let val = form[key];
-        if (typeof val === "boolean") {
-          form[key] = false;
-        } else {
-          form[key] = "";
-        }
-      }
-
-      return form;
-    }
-    default:
-      return state;
-  }
-};
-*/
 
 const empty = {};
 export default function FormProvider({
   children,
-  id,
+  // id,
   values: initialValues = empty,
-  controlled = false, //whether or not the form components are controlled
+  action = null, // async function to be used in a server action
+  result = "reset", // reset | clear | none | callback behaviour after a successful action
 }) {
   const formRef = useRef();
+  const [formState, formAction] = useFormState(action, {});
 
-  const [ notices, dispatchNotice ] = useReducer(noticeReducer, {error: "", success: ""});
-
-  const [values, setValues] = useState(controlled ? initialValues : {});
+  const [values, setValues] = useState(initialValues);
   const [blurred, setBlurred] = useState({});
+  const [changed, setChanged] = useState({});
+  const [errors, setErrors] = useState({});
   const [invalid, setInvalid] = useState(true);
   const [submitted, setSubmitted] = useState(false);
   const [toggleRender, setToggleRender] = useState(false);
 
-  const setError = useCallback((message) =>  {
-    dispatchNotice({ type: "error", message});
-  }, [dispatchNotice]);
-
-  const setSuccess = useCallback((message) =>  {
-    dispatchNotice({ type: "success", message});
-  }, [dispatchNotice]);
-
   const init = useCallback(
     (values) => {
-      if (controlled) {
-        setValues(values);
-      } else {
-        formRef.current.reset();
-      }
+      setValues(values);
+
       setBlurred({});
+      setChanged({});
+      setErrors({});
       // setChanged(false);
       setInvalid(true);
       setSubmitted(false);
     },
-    [setValues, controlled, formRef],
+    [setValues],
   );
 
   const reset = useCallback(() => {
@@ -127,10 +73,6 @@ export default function FormProvider({
 
   const clear = useCallback(() => {
     // dispatch({ type: "CLEAR" });
-    if (!controlled) {
-      formRef.current.clear();
-      return;
-    }
     let form = { ...values };
 
     for (let key in form) {
@@ -143,60 +85,72 @@ export default function FormProvider({
     }
 
     setValues(form);
-  }, [controlled, values, setValues]);
+  }, [values, setValues]);
 
   // force the form to render so that side effects can be picked up on.
   const renderForm = useCallback(() => {
     setToggleRender(toggleRender === true ? false : true);
   }, [toggleRender, setToggleRender]);
 
-  const isChanged = values !== initialValues;
+  if (typeof formState !== "object") {
+    throw Error("Invalid response received from server action");
+  }
 
   const context = useMemo(
     () => ({
-      id,
+      // id,
       formRef,
       invalid,
       setInvalid,
       submitted,
       setSubmitted,
       checkValidity,
-      isChanged,
+      isChanged: Object.keys(changed).length,
       // setChanged,
       // useValue,
       setValue,
       values,
       blurred,
       setBlurred,
+      changed,
+      setChanged,
       reset,
       init,
       clear,
       renderForm,
-      controlled,
       initialValues,
-      setSuccess,
-      setError,
-      error: notices.error,
-      success: notices.success,
+      // setSuccess,
+      // setError,
+      error: formState.error,
+      success: formState.success,
+      formAction: action && formAction,
+      formState: action && formState,
+      result,
+      errors,
+      setErrors,
     }),
     [
-      id,
+      // id,
       invalid,
       submitted,
       values,
       blurred,
+      changed,
       checkValidity,
       clear,
       init,
-      isChanged,
       reset,
       setValue,
       renderForm,
-      controlled,
       initialValues,
-      notices,
-      setError,
-      setSuccess,
+      // notices,
+      // setError,
+      // setSuccess,
+      formAction,
+      formState,
+      action,
+      result,
+      errors,
     ],
   );
 

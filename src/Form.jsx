@@ -1,9 +1,14 @@
+"use client";
+
 import React, { useCallback } from "react";
 import useForm from "./useForm";
 import useConfirm from "./useConfirm";
+import FormHelper from "./FormHelper";
 
 export default function Form({ children, confirm = false, ...props }) {
   const context = useForm();
+  const { formAction } = context;
+
   const { setInvalid, setSubmitted, formRef } = context;
   const { onSubmit } = props;
   useConfirm(confirm);
@@ -57,7 +62,9 @@ export default function Form({ children, confirm = false, ...props }) {
       onSubmit={handleSubmit}
       onChange={handleChange}
       onInvalid={handleInvalid}
+      action={formAction}
     >
+      <FormHelper />
       {children}
     </form>
   );

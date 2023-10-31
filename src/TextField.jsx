@@ -1,3 +1,5 @@
+"use client";
+
 import React, {
   useMemo,
   useCallback,
@@ -13,26 +15,13 @@ import isEmail from "validator/es/lib/isEmail";
 import TextFieldMUI from "@mui/material/TextField";
 
 import checkValidity from "./lib/checkValidity";
-// import { makeStyles } from '@mui/material/styles';
 import useForm from "./useForm";
 import useValue from "./useValue";
 import useBlur from "./useBlur";
+import useChange from "./useChange";
+import useError from "./useError";
 
 import sentenceCase from "./utils/sentenceCase";
-/*
-const useStyles = makeStyles(theme => ({
-  root: {
-    minWidth: '12rem',
-    marginBottom: theme.spacing(1),
-  },
-  addHelperText: {
-    position: 'absolute',
-    top: '100%',
-    margin: '0',
-    marginTop: '2px',
-  }
-}));
-*/
 
 const TextField = ({ label, pattern, message, onChange, ...props }, extRef) => {
   const { name, select, type } = props;
@@ -41,12 +30,15 @@ const TextField = ({ label, pattern, message, onChange, ...props }, extRef) => {
     label = sentenceCase(name);
   }
 
-  const { submitted, initialValues, controlled } = useForm();
-  const [value, setValue] = useValue(name);
+  const { formState, submitted, initialValues } = useForm();
+  const [formValue, setFormValue] = useValue(name);
+  const [value, setValue] = useState(formValue);
 
   // Keep track if field has been blurred to know if we should display errors
   const [blur, setBlur] = useBlur(name);
-  const [error, setError] = useState(null);
+  const [, setChange] = useChange(name);
+  const [error, setError] = useError(name);
+  // const [error, setError] = useState(null);
   const intRef = useRef();
   const inputRef = extRef || intRef;
 
@@ -85,14 +77,12 @@ const TextField = ({ label, pattern, message, onChange, ...props }, extRef) => {
         }
       }
 
-      /*
       if ((blur || submitted) && !select) {
         const err = checkValidity(input, message);
         setError(err);
       }
-    */
     },
-    [setValue, /* blur, submitted, select, */ message, onChange, type],
+    [setValue, blur, submitted, select, setError, message, onChange, type],
   );
 
   const handleBlur = useCallback(
@@ -100,43 +90,72 @@ const TextField = ({ label, pattern, message, onChange, ...props }, extRef) => {
       if (onBlur) {
         onBlur(evt);
       }
-      if (!select) {
-        setBlur(true);
-        setError(checkValidity(evt.target, message));
+
+      setFormValue(value);
+
+      if (select) {
+        return;
       }
+
+      setBlur(true);
+      setChange(initialValues[name] !== value);
+      setError(checkValidity(evt.target, message));
     },
-    [onBlur, select, message, setBlur],
+    [
+      onBlur,
+      select,
+      message,
+      initialValues,
+      value,
+      setError,
+      name,
+      setFormValue,
+      setBlur,
+      setChange,
+    ],
   );
 
-  const validationMessage = inputRef?.current?.validationMessage;
+  // const validationMessage = inputRef?.current?.validationMessage;
 
   const initialRender = useRef;
 
+  useEffect(() => {
+    setValue(formValue);
+  }, [formValue]);
+
+  // apply side effects when form submission is attempted.
   useEffect(() => {
     if (!initialRender.current) {
       initialRender.current = true;
       return;
     }
 
+    if (select) {
+      return;
+    }
+
     const input = inputRef.current;
-    if ((blur || submitted) && !select) {
+    if (submitted && !select) {
       const err = checkValidity(input, message);
       setError(err);
     }
   }, [
     inputRef,
     select,
-    blur,
     submitted,
-    validationMessage,
+    setError,
+    // validationMessage,
     initialRender,
     message,
   ]);
 
+  const serverErrors = formState?.fieldErrors || {};
+  const errorMessage = serverErrors[name] || error;
+
   let helperProps = {};
-  if (error) {
+  if (errorMessage) {
     helperProps = {
-      helperText: error,
+      helperText: errorMessage,
       FormHelperTextProps: {
         error: true,
         // className: classes.addHelperText,
@@ -144,21 +163,14 @@ const TextField = ({ label, pattern, message, onChange, ...props }, extRef) => {
     };
   }
 
-  if (controlled) {
-    props.value = value || "";
-  }
-
-  if (name) {
-    props.defaultValue = initialValues[name] || "";
-  }
-
   return (
     <TextFieldMUI
+      value={value || ""}
       label={label}
       {...props}
       {...helperProps}
       onBlur={handleBlur}
-      onChange={controlled ? handleChange : onChange}
+      onChange={handleChange}
       inputRef={inputRef}
       inputProps={inputProps}
     />
