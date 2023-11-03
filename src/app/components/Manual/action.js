@@ -12,5 +12,5 @@ export default async function action() {
     fieldErrors: {required: "This field is required"}
   }
   */
-  return { success: "For was submitted successfully" };
+  return { success: "Form was submitted successfully" };
 }

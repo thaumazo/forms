@@ -23,7 +23,17 @@ import useError from "./useError";
 
 import sentenceCase from "./utils/sentenceCase";
 
-const TextField = ({ label, pattern, message, onChange, ...props }, extRef) => {
+const TextField = (
+  {
+    label,
+    pattern,
+    message,
+    onChange,
+    matches, // field matched for validation
+    ...props
+  },
+  extRef,
+) => {
   const { name, select, type } = props;
 
   if (label === undefined) {
@@ -32,6 +42,7 @@ const TextField = ({ label, pattern, message, onChange, ...props }, extRef) => {
 
   const { formState, submitted, initialValues } = useForm();
   const [formValue, setFormValue] = useValue(name);
+  const [matchValue] = useValue(matches);
   const [value, setValue] = useState(formValue);
 
   // Keep track if field has been blurred to know if we should display errors
@@ -64,25 +75,9 @@ const TextField = ({ label, pattern, message, onChange, ...props }, extRef) => {
       }
 
       const input = evt.target;
-      const value = input.value;
-      setValue(value);
-
-      // Custom validation for email
-      if (type === "email") {
-        if (!isEmail(value)) {
-          let msg = message || "Please enter a valid email address";
-          input.setCustomValidity(msg);
-        } else {
-          input.setCustomValidity(""); // clear any prior message
-        }
-      }
-
-      if ((blur || submitted) && !select) {
-        const err = checkValidity(input, message);
-        setError(err);
-      }
+      setValue(input.value);
     },
-    [setValue, blur, submitted, select, setError, message, onChange, type],
+    [setValue, onChange],
   );
 
   const handleBlur = useCallback(
@@ -125,24 +120,52 @@ const TextField = ({ label, pattern, message, onChange, ...props }, extRef) => {
 
   // apply side effects when form submission is attempted.
   useEffect(() => {
+    /*
     if (!initialRender.current) {
       initialRender.current = true;
       return;
     }
+    */
 
     if (select) {
       return;
     }
 
     const input = inputRef.current;
-    if (submitted && !select) {
+
+    // Custom validation for email
+    if (type === "email") {
+      if (!isEmail(value)) {
+        let msg = message || "Please enter a valid email address";
+        input.setCustomValidity(msg);
+      } else {
+        input.setCustomValidity(""); // clear any prior message
+      }
+    }
+
+    if (matches) {
+      if (value !== matchValue) {
+        input.setCustomValidity(
+          message || "he passwords you entered don't match.",
+        );
+      } else {
+        input.setCustomValidity("");
+      }
+    }
+
+    if (blur || submitted) {
       const err = checkValidity(input, message);
       setError(err);
     }
   }, [
     inputRef,
     select,
+    blur,
     submitted,
+    matchValue,
+    value,
+    matches,
+    type,
     setError,
     // validationMessage,
     initialRender,

@@ -5,7 +5,6 @@ import { Grid } from "@mui/material";
 import {
   TextField,
   Password,
-  ConfirmPassword,
   Checkbox,
   Select,
   Radio,
@@ -36,8 +35,10 @@ export default function ManualFormInner() {
           <Password autoComplete="new-password" />
         </Grid>
         <Grid item xs={6}>
-          <ConfirmPassword
+          <Password
             label="Confirm password"
+            name="confirm_passwore"
+            matches="password"
             autoComplete="new-password"
           />
         </Grid>

@@ -11,7 +11,6 @@ export { default as Radio } from "./Radio";
 export { default as Checkbox } from "./Checkbox";
 export { default as Select } from "./Select";
 export { default as Password } from "./Password";
-export { default as ConfirmPassword } from "./ConfirmPassword";
 export { default as Notice } from "./Notice";
 
 export { default as Submit } from "./Submit";

@@ -9,15 +9,16 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const Password = forwardRef(
-  (
-    {
-      pattern = "(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[\\S]{8,}",
-      message = "Must be at least 8 characters; include both big and small letters and a number.",
-      name = "password",
-      ...props
-    },
-    ref,
-  ) => {
+  ({ pattern, message, name = "password", ...props }, ref) => {
+    pattern =
+      pattern ??
+      (props.matches ? undefined : "(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[\\S]{8,}");
+    message =
+      message ??
+      (props.matches
+        ? undefined
+        : "Must be at least 8 characters; include both big and small letters and a number.");
+
     const [showPassword, setShowPassword] = useState(false);
 
     const handleClickShowPassword = useCallback(() => {
