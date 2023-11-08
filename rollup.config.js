@@ -13,8 +13,8 @@ import replace from "@rollup/plugin-replace";
 
 export default {
   input: [
-    // "src/index.jsx",
     "src/",
+    "src/index.jsx",
     /*
     "src/Context.jsx",
     "src/ThemeProvider.js",
