@@ -45,6 +45,10 @@
   "main": "index.jsx",
   "module": "./dist/index.jsx",
   "exports": {
+    ".": {
+      "import": "./dist/index.jsx",
+      "require": "./dist/index.cjs"
+    },
     "./": "./dist/"
   },
   "type": "module",
