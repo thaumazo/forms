@@ -9,15 +9,30 @@ import postcss from "rollup-plugin-postcss";
 import babel from "@rollup/plugin-babel";
 import replace from "@rollup/plugin-replace";
 
-import packageJson from "./package.json" assert { type: "json" };
+//import packageJson from "./package.json" assert { type: "json" };
 
 export default {
-  input: "src/index.jsx",
+  input: [
+    // "src/index.jsx",
+    "src/",
+    /*
+    "src/Context.jsx",
+    "src/ThemeProvider.js",
+    "src/Provider.jsx",  
+    "src/Form.jsx",
+    "src/TextField.jsx"
+    */
+  ],
   output: [
     {
-      file: packageJson.module,
-      format: "esm",
+      dir: "dist",
+      entryFileNames: '[name].js',
+      format: "es",
       sourcemap: true,
+      preserveModules: true,
+      preserveModulesRoot: 'src', 
+      sourcemap: true,
+      banner: () => '"use client";',
     },
   ],
   plugins: [
@@ -38,14 +53,24 @@ export default {
       exclude: "node_modules/**",
       presets: [
         "@babel/preset-env",
+      /*
         [
           "@babel/preset-react",
           {
             runtime: "automatic",
           },
         ],
+      */
       ],
-      plugins: ["@babel/plugin-proposal-export-default-from"],
+      plugins: [
+        "@babel/plugin-proposal-export-default-from",
+        [
+        "@babel/plugin-transform-react-jsx",
+        {
+          runtime: "automatic",
+        },
+        ]
+      ],
     }),
     replace({
       preventAssignment: false,
@@ -53,6 +78,7 @@ export default {
     }),
   ],
   external: [
+    "src/app",
     "react",
     "react-dom",
     "react-redux",
@@ -62,4 +88,15 @@ export default {
     "react-is",
     "react/jsx-runtime",
   ],
+  onwarn: function(warning, warn) {
+    // suppress the "default imported from external module" warnings
+
+    if (
+      warning.code === 'UNUSED_EXTERNAL_IMPORT' 
+      && warning.message.includes("imported from external module \"react\" but never used")
+    ) {
+      return;
+    }
+    warn(warning);
+  }
 };

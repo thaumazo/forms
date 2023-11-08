@@ -2,7 +2,6 @@
   "name": "@thaumazo/forms",
   "version": "0.2.7-canary.4",
   "description": "An extension of mui forms with additional features",
-  "main": "index.jsx",
   "scripts": {
     "dev": "next dev",
     "rollup": "rollup -c",
@@ -43,9 +42,12 @@
     "@mui/material": "^5.14.15",
     "lodash": "^4.17.21"
   },
-  "module": "./dist/index.jsx",
+  "exports": {
+    "./": "./dist/"
+  },
   "type": "module",
   "dependencies": {
+    "@babel/plugin-transform-react-jsx": "^7.22.15",
     "@babel/preset-env": "^7.22.20",
     "validator": "^13.11.0"
   }

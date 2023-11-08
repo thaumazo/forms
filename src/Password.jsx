@@ -1,4 +1,3 @@
-"use client";
 
 import { useState, useCallback, forwardRef } from "react";
 import TextField from "./TextField";
