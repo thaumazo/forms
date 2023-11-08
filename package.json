@@ -42,6 +42,8 @@
     "@mui/material": "^5.14.15",
     "lodash": "^4.17.21"
   },
+  "main": "index.jsx",
+  "module": "./dist/index.jsx",
   "exports": {
     "./": "./dist/"
   },

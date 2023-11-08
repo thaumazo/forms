@@ -26,7 +26,11 @@ export default {
   output: [
     {
       dir: "dist",
-      entryFileNames: '[name].js',
+      // entryFileNames: '[name].js',
+      entryFileNames: (chunkInfo) => {
+        const extension = chunkInfo.facadeModuleId.split('.').pop();
+        return `${chunkInfo.name}.${extension}`;
+      },
       format: "es",
       sourcemap: true,
       preserveModules: true,
