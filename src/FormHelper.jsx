@@ -13,13 +13,13 @@ export default function Submit() {
       setSubmitted(false);
       if (formState?.success) {
         if (typeof result === "function") {
+          result(formState);
+        } else if (result === "reset") {
           if (formState?.values) {
             init(formState?.values);
           } else {
-            result(formState);
+            reset();
           }
-        } else if (result === "reset") {
-          reset();
         } else if (result === "clear") {
           clear();
         }
