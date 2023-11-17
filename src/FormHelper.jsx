@@ -3,7 +3,7 @@ import { useFormStatus } from "react-dom";
 import useForm from "./useForm";
 
 export default function Submit() {
-  const { reset, clear, result, setSubmitted, formState } = useForm();
+  const { reset, clear, result, init, setSubmitted, formState } = useForm();
   const { pending } = useFormStatus();
   const lastPending = useRef(false);
 
@@ -13,7 +13,11 @@ export default function Submit() {
       setSubmitted(false);
       if (formState?.success) {
         if (typeof result === "function") {
-          result(formState);
+          if (formState?.values) {
+            init(formState?.values);
+          } else {
+            result(formState);
+          }
         } else if (result === "reset") {
           reset();
         } else if (result === "clear") {
@@ -23,7 +27,7 @@ export default function Submit() {
     }
 
     lastPending.current = pending;
-  }, [pending, reset, clear, result, setSubmitted, formState]);
+  }, [pending, init, reset, clear, result, setSubmitted, formState]);
 
   return null;
 }

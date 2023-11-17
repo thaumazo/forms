@@ -17,8 +17,8 @@ export { default as Submit } from "./Submit";
 
 export { default as useForm } from "./useForm";
 export { default as useValue } from "./useValue";
-export { default as useBlur } from "./useBlur";
 export { default as useValues } from "./useValues";
+export { default as useBlur } from "./useBlur";
 export { default as useConfirm } from "./useConfirm";
 export { default as useDarkMode } from "./useDarkMode";
 

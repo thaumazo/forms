@@ -32,6 +32,7 @@
     "node-sass": "^9.0.0",
     "prettier": "^3.0.3",
     "rollup": "^4.1.4",
+    "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2"
   },
@@ -45,11 +46,23 @@
   "main": "index.jsx",
   "module": "./dist/index.jsx",
   "exports": {
-    ".": {
-      "import": "./dist/index.jsx",
-      "require": "./dist/index.cjs"
-    },
-    "./": "./dist/"
+    ".": "./dist/index.jsx",
+    "./ThemeProvider": "./dist/ThemeProvider.js",
+    "./Provider": "./dist/Provider.jsx",
+    "./Form": "./dist/Form.jsx",
+    "./TextField": "./dist/TextField.jsx",
+    "./Password": "./dist/Password.jsx",
+    "./Radio": "./dist/Radio.jsx",
+    "./Checkbox": "./dist/Checkbox.jsx",
+    "./Select": "./dist/Select.jsx",
+    "./Submit": "./dist/Submit.jsx",
+    "./Notice": "./dist/Notice.jsx",
+    "./useForm": "./dist/useForm.js",
+    "./useValue": "./dist/useValue.js",
+    "./useValues": "./dist/useValues.js",
+    "./useBlur": "./dist/useBlur.js",
+    "./useConfirm": "./dist/useConfirm.js",
+    "./useDarkMode": "./dist/useDarkMode.js"
   },
   "type": "module",
   "dependencies": {

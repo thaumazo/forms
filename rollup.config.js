@@ -8,7 +8,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import postcss from "rollup-plugin-postcss";
 import babel from "@rollup/plugin-babel";
 import replace from "@rollup/plugin-replace";
-
+import del from 'rollup-plugin-delete';
 //import packageJson from "./package.json" assert { type: "json" };
 
 export default {
@@ -40,6 +40,7 @@ export default {
     },
   ],
   plugins: [
+    del({ targets: 'dist/*' }),
     peerDepsExternal(),
     resolve({
       extensions: [".mjs", ".js", ".json", ".node", ".jsx"],
