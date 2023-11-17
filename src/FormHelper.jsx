@@ -16,7 +16,7 @@ export default function Submit() {
           result(formState);
         } else if (result === "reset") {
           if (formState?.values) {
-            init(formState?.values);
+            init(formState.values);
           } else {
             reset();
           }
