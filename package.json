@@ -62,7 +62,8 @@
     "./useValues": "./dist/useValues.js",
     "./useBlur": "./dist/useBlur.js",
     "./useConfirm": "./dist/useConfirm.js",
-    "./useDarkMode": "./dist/useDarkMode.js"
+    "./useDarkMode": "./dist/useDarkMode.js",
+    "./utils/sentenceCase": "./dist/utils/sentenceCase.js"
   },
   "type": "module",
   "dependencies": {
