@@ -1,5 +1,16 @@
-export default function checkValidity(input, message = null) {
+import checkValue from "./checkValue";
+
+export default function checkValidity(input, props, values) {
+  const message = props.message || null;
   const { validity } = input;
+
+  const checkMessage = checkValue(input.name, props, values);
+  if (checkMessage) {
+    input.setCustomValidity(checkMessage);
+    return message || checkMessage;
+  } else {
+    input.setCustomValidity("");
+  }
 
   if (validity.valid) {
     return null;

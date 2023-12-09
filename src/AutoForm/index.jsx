@@ -1,0 +1,98 @@
+"use client";
+
+import Grid from "../Grid";
+import Item from "../Grid/Item";
+
+import Provider from "../Provider";
+import Typography from "@mui/material/Typography";
+import Form from "../Form";
+import Layout from "../Layout";
+import Notice from "../Notice";
+
+import Submit from "../Submit";
+
+export default function AutoForm({
+  action,
+  values,
+  title,
+  name,
+  description,
+  fields,
+  submit = "Submit",
+  buttons, // replace subit button with custom buttons
+  onSubmit,
+  onChange,
+  onResponse,
+  gap = "16px",
+  children,
+}) {
+  return (
+    <Provider action={action} values={values}>
+      <Form onSubmit={onSubmit} onChange={onChange} onResponse={onResponse}>
+        <Grid gap={gap}>
+          {title && (
+            <Item>
+              {(() => {
+                let titleOptions = {
+                  variant: "h4", 
+                };
+
+                if (typeof (title) === "string") {
+                  titleOptions.children = title;
+                } else if (typeof(title) === "object") {
+                  titleOptions = {
+                    ...titleOptions,
+                    ...title,
+                  }
+                }
+               return <Typography {...titleOptions} />
+              })()}
+            </Item>
+          )}
+
+          {description && (
+            <Item>
+              {(() => {
+                let descriptionOptions = {
+                  variant: "subtitle1", 
+                };
+
+                if (typeof (description) === "string") {
+                  descriptionOptions.children = description;
+                } else if (typeof(description) === "object") {
+                  descriptionOptions.children = {
+                    ...descriptionOptions,
+                    ...description,
+                  }
+                }
+               return <Typography {...descriptionOptions} />
+              })()}
+            </Item>
+          )}
+
+          <Item hideIfEmpty>
+            <Notice name={name} />
+          </Item>
+          <Item>{children || <Layout gap={gap} fields={fields} />}</Item>
+          <Item>
+            {(() => {
+              if (buttons) {
+                return buttons;
+              }
+
+              let submitOptions = {}
+              if (typeof(submit) === "string") {
+                submitOptions.children = submit
+              } else if (typeof(submit) === "object") {
+                submitOptions = submit;
+              }
+ 
+              return <Submit {...submitOptions} />
+
+            })()}
+          </Item>
+        </Grid>
+      </Form>
+    </Provider>
+  );
+}
