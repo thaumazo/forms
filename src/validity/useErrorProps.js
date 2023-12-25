@@ -1,27 +1,28 @@
-import { useMemo, useEffect } from "react";
+import { useMemo } from "react";
 
 import useForm from "../useForm";
-import useError from "../useError";
-import useBlur from "../useBlur";
+// import useError from "../useError";
 
-import checkInputValidity from "./checkInputValidity";
-
-export default function useErrorProps(props, inputRef) {
+export default function useErrorProps(props, field) {
   const { name } = props;
-  const { noValidate, formState, values, submitted } = useForm();
-  const [error, setError] = useError(name);
-  const [blur] = useBlur(name);
+  const form = useForm();
 
-  const serverErrors = formState?.fieldErrors || {};
-  const errorMessage = serverErrors[name] || (noValidate ? "" : error);
-
+  /*
   useEffect(() => {
-    if (blur || submitted) {
+    if (field.blurred || form.showErrors) {
       const input = inputRef.current;
-      const err = checkInputValidity(input, props, values);
+      const err = checkInputValidity(input, props, form);
       setError(err);
     }
-  }, [props, blur, submitted, values, setError, inputRef]);
+  }, [props, field.blurred, field.value, form.showErrors, form, setError, inputRef]);
+  */
+
+  let error;
+  if (form.noValidate == false && (field.blurred || form.showErrors)) {
+    error = field.checkValidity();
+  }
+  const serverErrors = form.state?.fieldErrors || {};
+  const errorMessage = serverErrors[name] || error;
 
   return useMemo(() => {
     let helperProps = {};
