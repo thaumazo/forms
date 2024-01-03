@@ -1,19 +1,37 @@
+"use client";
 
 import { ThemeProvider as Provider, createTheme } from "@mui/material/styles";
 // import CssBaseline from '@mui/material/CssBaseline';
 
 import useDarkMode from "./useDarkMode";
 
+const shared = {
+  components: {
+    // Name of the component ⚛️
+    MuiButton: {
+      styleOverrides: {
+        // Name of the rule
+        root: {
+          // Some CSS
+          textTransform: "none",
+        },
+      },
+    },
+  },
+};
+
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
   },
+  ...shared,
 });
 
 const lightTheme = createTheme({
   palette: {
     mode: "light",
   },
+  ...shared,
 });
 
 export default function ThemeProvider({
