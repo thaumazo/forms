@@ -1,51 +1,75 @@
+import React from "react";
 
-import React, { useCallback } from "react";
+import useField from "./useField";
 
-import useValue from "./useValue";
+import Radio from "./base/Radio";
+import Field from "./Field";
 
-import MUIRadio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
-import FormControlLabel from "@mui/material/FormControlLabel";
+import styles from "./form.module.scss";
 
-import sentenceCase from "./utils/sentenceCase";
+export default function RadioField(props) {
+  const inputRef = React.useRef();
+  const field = useField(props, inputRef);
 
-export default function Radio({
-  label,
-  name,
-  row = false,
-  disabled,
-  options = [],
-}) {
-  if (label === undefined) {
-    label = sentenceCase(name);
-  }
-
-  const [value, setValue] = useValue(name);
-  const handleChange = useCallback(
-    (evt) => {
-      setValue(evt.target.value);
-    },
-    [setValue],
-  );
+  let { row = false, options = [], ...rest } = field.props;
 
   return (
-    <FormControl component="fieldset">
-      <FormLabel component="legend">{label}</FormLabel>
-      <RadioGroup row={row} name={name} value={value} onChange={handleChange}>
-        {options.map(([_value, _label]) => {
+    <Field field={field}>
+      <div className={styles["radioRow" + row] || null}>
+        {options.map(([_value, _label], key) => {
+          const id = field.props.id + "-" + _value;
           return (
-            <FormControlLabel
+            <Radio
               key={_value}
+              row={row}
               value={_value}
-              control={<MUIRadio disabled={disabled} color="primary" />}
+              ref={key === 0 ? inputRef : undefined}
+              {...rest}
+              id={id}
+              checked={field.value === String(_value)}
               label={_label}
-              labelPlacement="end"
             />
           );
         })}
-      </RadioGroup>
-    </FormControl>
+      </div>
+    </Field>
   );
+
+  /*
+  return (
+    <div>
+      <Label field={field} className={styles.mb} />
+      <div className={styles["radioRow" + row] || null}>
+        {options.map(([_value, _label], key) => {
+          const id = field.id + "-" + _value;
+          return (
+            <div
+              key={_value}
+              className={styles.flex + " " + styles["option" + row] || ""}
+            >
+              <label className={styles.radio}>
+                <input
+                  value={_value}
+                  disabled={disabled}
+                  ref={key === 0 ? inputRef : undefined}
+                  {...rest}
+                  id={id}
+                  checked={field.value === String(_value)}
+                  type="radio"
+                />
+                <span>
+                  <CircleIcon width="0.875rem" height="0.875rem" />
+                </span>
+              </label>
+              <label className={styles.label} htmlFor={id}>
+                {_label}
+              </label>
+            </div>
+          );
+        })}
+      </div>
+      <Error field={field} />
+    </div>
+  );
+  */
 }

@@ -1,26 +1,11 @@
 "use client";
 
-import { ThemeProvider, Provider, Layout } from "/src";
+// import Provider from "../../../Provider";
+import AutoForm from "../../../AutoForm";
 
-const fields = [
-  {
-    name: "first_name",
-    required: true,
-    xs: 6, // grid spacing
-  },
-  {
-    name: "last_name",
-    required: true,
-    xs: 6, // grid spacing
-  },
-];
+import fields from "./fields";
+import action from "./action";
 
 export default function AutomaticLayout() {
-  return (
-    <ThemeProvider theme="auto">
-      <Provider>
-        <Layout fields={fields} />
-      </Provider>
-    </ThemeProvider>
-  );
+  return <AutoForm title="Automatic form" fields={fields} action={action} />;
 }

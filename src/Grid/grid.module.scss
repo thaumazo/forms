@@ -14,15 +14,12 @@ $breakpoints: (
 
 @each $breakpoint, $width in $breakpoints {
   @for $i from 1 through 12 {
-    @if $breakpoint == "xs" {
+    .#{$breakpoint}-#{$i} {
+      grid-column: span 12;
+    }
+    @media (min-width: $width) {
       .#{$breakpoint}-#{$i} {
         grid-column: span $i;
-      }
-    } @else {
-      @media (min-width: $width) {
-        .#{$breakpoint}-#{$i} {
-          grid-column: span $i;
-        }
       }
     }
   }

@@ -1,10 +1,11 @@
 "use client";
 
+import ThemeProvider from "./ThemeProvider";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import styles from "./navigation.module.css";
-import ThemeProvider from "../../../ThemeProvider";
 
 import * as React from "react";
 import Tabs from "@mui/material/Tabs";

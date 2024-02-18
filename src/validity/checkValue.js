@@ -1,6 +1,8 @@
 import normalize from "./normalize";
 import isEmail from "validator/es/lib/isEmail";
 
+import { GlobalFormState } from "../Provider";
+
 export default function checkValue(name, props, values) {
   const rules = normalize(props);
   const value = getValue(values, name);
@@ -25,8 +27,19 @@ export default function checkValue(name, props, values) {
 
   if (rules.matches) {
     const matchValue = getValue(values, rules.matches.field);
+
+    let matchField;
+    if (values instanceof GlobalFormState) {
+      matchField = values.fields.get(rules.matches.field);
+    }
+
     if (value !== matchValue) {
+      if (matchField) {
+        matchField.matchField = values.fields.get(name);
+      }
       return rules.matches.message;
+    } else if (matchField) {
+      delete matchField.matchField;
     }
   }
 }
@@ -34,6 +47,8 @@ export default function checkValue(name, props, values) {
 function getValue(data, name) {
   if (data instanceof FormData) {
     return data.get(name);
+  } else if (data instanceof GlobalFormState) {
+    return data.fields.get(name)?.value;
   } else {
     return data[name];
   }

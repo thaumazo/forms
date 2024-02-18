@@ -1,23 +1,23 @@
-
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useForm from "./useForm";
 
 // Restore if running from next.js
 // import Router from 'next/router';
 
 // confirm before leaving.
-export default function useConfirm(confirm = true) {
-  const { isChanged } = useForm();
+export default function useConfirm(message = "Exit without saving changes?") {
+  const form = useForm();
+  const [confirm, setConfirm] = useState(message);
 
   useEffect(() => {
     if (!confirm) {
       return;
     }
 
-    const message = "Do you want to leave?";
+    const message = confirm;
     /* // restore this code if running from within next.js
     const routeChangeStart = (url) => {
-      if (Router.asPath !== url && isChanged() && !window.confirm(message)) {
+      if (Router.asPath !== url && form.changed && !window.confirm(message)) {
         // Router.events.emit('routeChangeError');
         setTimeout(() => {
           Router.router.abortComponentLoad();
@@ -30,7 +30,7 @@ export default function useConfirm(confirm = true) {
     */
 
     const beforeunload = (e) => {
-      if (isChanged()) {
+      if (form.changed) {
         e.preventDefault();
         e.returnValue = message;
         return message;
@@ -48,5 +48,7 @@ export default function useConfirm(confirm = true) {
       // Router.events.off('routeChangeStart', routeChangeStart);
       window.removeEventListener("beforeunload", beforeunload);
     };
-  }, [isChanged, confirm]);
+  }, [form, confirm]);
+
+  return setConfirm;
 }

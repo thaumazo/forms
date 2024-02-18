@@ -3,12 +3,12 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 6rem;
   min-height: 100vh;
+  margin: 2rem 0;
 }
 
 .container {
-  width: 600px;
+  max-width: 600px;
 }
 
 .description {

@@ -1,17 +1,19 @@
 import useForm from "./useForm";
 
-import { Button } from "@mui/material";
+// import Button from "@mui/material/Button";
+import Button from "./Button";
 import { useFormStatus } from "react-dom";
 
 export default function Submit({
   disabled,
   mode = "nonde", // valid | none
-  variant = "contained",
-  size = "large",
+  // variant = "contained",
+  // size = "large",
   children = "Submit",
   ...props
 }) {
-  const { invalid } = useForm();
+  const form = useForm();
+  const { invalid } = form;
   const { pending } = useFormStatus();
 
   if (mode === "valid") {
@@ -21,9 +23,7 @@ export default function Submit({
   return (
     <Button
       type="submit"
-      variant={variant}
-      size={size}
-      disabled={pending || disabled}
+      disabled={form.disabled || form.pending || pending || disabled}
       {...props}
     >
       {children}

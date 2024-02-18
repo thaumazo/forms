@@ -2,3 +2,4 @@ node_modules
 .next
 core
 /dist
+.DS_Store

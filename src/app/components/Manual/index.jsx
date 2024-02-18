@@ -1,6 +1,6 @@
 "use client";
 
-import { ThemeProvider, Provider } from "/src";
+import Provider from "../../../Provider";
 
 import Form from "./Form";
 import action from "./action";
@@ -13,10 +13,8 @@ const initial = {
 
 export default function ManualFormWrapper() {
   return (
-    <ThemeProvider theme="auto">
-      <Provider values={initial} action={action}>
-        <Form />
-      </Provider>
-    </ThemeProvider>
+    <Provider values={initial} action={action}>
+      <Form />
+    </Provider>
   );
 }

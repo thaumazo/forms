@@ -6,16 +6,19 @@ import Switch from "@mui/material/Switch";
 import useForm from "../../../useForm";
 
 export default function ToggleValidity() {
-  const { noValidate, setNoValidate } = useForm();
+  const form = useForm();
 
   const handleChange = (evt) => {
-    setNoValidate(evt.target.checked ? false : true);
+    form.noValidate = evt.target.checked ? false : true;
   };
 
   return (
     <FormControlLabel
       control={
-        <Switch checked={noValidate ? false : true} onChange={handleChange} />
+        <Switch
+          checked={form.noValidate ? false : true}
+          onChange={handleChange}
+        />
       }
       label="Disable client side validation to test server side validation"
     />

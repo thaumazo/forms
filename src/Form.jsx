@@ -1,70 +1,71 @@
-
-import React, { useCallback } from "react";
+import React, { useCallback, useRef, useEffect } from "react";
 import useForm from "./useForm";
 import useConfirm from "./useConfirm";
-import FormHelper from "./FormHelper";
+// import FormHelper from "./FormHelper";
 
-export default function Form({ children, confirm = false, ...props }) {
-  const context = useForm();
-  const { formAction } = context;
+export default function Form({
+  confirm = false,
+  onSubmit,
+  onResponse,
+  children,
+  ...props
+}) {
+  const form = useForm();
 
-  const { setInvalid, setSubmitted, formRef } = context;
-  const { onSubmit } = props;
   useConfirm(confirm);
+
+  const lastState = useRef();
+  useEffect(() => {
+    if (form.initialState !== form.state && lastState.current !== form.state) {
+      if (onResponse) {
+        const evt = new Event("response");
+        onResponse(evt, form);
+      } else if (form?.state.success) {
+        form.reset();
+      }
+    }
+    lastState.current = form.state;
+  }, [form, form.initialState, form.state, onResponse]);
 
   const handleSubmit = useCallback(
     (evt) => {
-      const myForm = evt.currentTarget;
-      setSubmitted(true);
-      if (!myForm.checkValidity()) {
-        evt.preventDefault();
-        // setInvalid(true)
+      form.showErrors = true;
 
-        const input = formRef.current.querySelector(":invalid");
+      if (form.noValidate == false && form.invalid) {
+        evt.preventDefault();
+
+        const input = form.ref.current.querySelector(":invalid");
         if (input) {
           input.focus();
         }
 
         return;
       }
-      setInvalid(false);
+      form.showErrors = false;
 
       if (onSubmit) {
-        onSubmit(evt, context);
+        onSubmit(evt, form);
       }
     },
-    [context, formRef, onSubmit, setInvalid, setSubmitted],
-  );
-
-  const handleChange = useCallback(
-    (evt) => {
-      const myForm = evt.currentTarget;
-      setInvalid(!myForm.checkValidity());
-    },
-    [setInvalid],
+    [form, onSubmit],
   );
 
   // block native form validation UX
-  const handleInvalid = useCallback(
-    (evt) => {
-      evt.preventDefault();
-      setInvalid(true);
-    },
-    [setInvalid],
-  );
+  const handleInvalid = useCallback((evt) => {
+    evt.preventDefault();
+  }, []);
 
   return (
     <form
       noValidate
-      ref={formRef}
+      ref={form.ref}
       {...props}
       onSubmit={handleSubmit}
-      onChange={handleChange}
       onInvalid={handleInvalid}
-      action={formAction}
+      action={form.action}
     >
-      <FormHelper />
       {children}
     </form>
   );
 }
+//      <FormHelper />

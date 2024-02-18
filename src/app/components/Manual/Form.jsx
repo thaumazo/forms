@@ -1,6 +1,6 @@
 "use client";
 
-import { Form } from "/src";
+import Form from "../../../Form";
 import Inner from "./Inner";
 
 export default function ManualForm() {

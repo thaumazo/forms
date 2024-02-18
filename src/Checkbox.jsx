@@ -1,31 +1,37 @@
+import React from "react";
 
-import React, { useCallback } from "react";
-import useValue from "./useValue";
+import Field from "./Field";
+import Checkbox from "./base/Checkbox";
 
-import MUICheckbox from "@mui/material/Checkbox";
-import FormControlLabel from "@mui/material/FormControlLabel";
+import useField from "./useField";
 
-export default function Checkbox({ name, label }) {
-  const [value, setValue] = useValue(name);
-
-  const handleChange = useCallback(
-    (evt) => {
-      setValue(evt.target.checked);
-    },
-    [setValue],
-  );
+export default function CheckboxField(props) {
+  const inputRef = React.useRef();
+  const field = useField(props, inputRef);
+  // let { name, label, helperText } = field.props;
 
   return (
-    <FormControlLabel
-      control={
-        <MUICheckbox
-          checked={value || false}
-          onChange={handleChange}
-          name={name}
-          color="primary"
-        />
-      }
-      label={label}
-    />
+    <Field field={field} label={null}>
+      <Checkbox {...field.props} label={field.label} />
+    </Field>
   );
+
+  /*
+  return (
+    <div className={styles.inlineFlex + " " + styles.flexWrap}>
+      <label className={styles.checkbox}>
+        <input
+          {...field.props}
+          type="checkbox"
+          checked={field.value || false}
+        />
+        <span>
+          <CheckIcon width="0.874rem" height="0.874rem" />
+        </span>
+      </label>
+      <Label field={field} />
+      <Error field={field} />
+    </div>
+  );
+  */
 }

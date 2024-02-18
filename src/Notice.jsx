@@ -1,30 +1,86 @@
+import { useState } from "react";
 import { useRef, useEffect } from "react";
-import Alert from "@mui/material/Alert";
-import Fade from "@mui/material/Fade";
+import Alert from "./Alert";
 
 import useForm from "./useForm";
 
-export default function Notice(props) {
-  const { error, success } = useForm();
+export default function Notice({ name, ...props }) {
+  const form = useForm();
+  const { error, success } = form;
+  const [cookieError, setCookieError] = useState();
+  const [cookieSuccess, setCookieSuccess] = useState();
+
   const ref = useRef();
 
-  const hasNotice = error || success;
   useEffect(() => {
-    if (hasNotice && ref.current) {
+    if (!name) {
+      return;
+    }
+
+    const cookie = getCookie(name);
+
+    if (cookie) {
+      // one use cookie. Delete it after the message is displayed.
+      document.cookie =
+        name + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+
+      if (cookie.match(/^{/)) {
+        const json = JSON.parse(cookie);
+        if (json.error) {
+          setCookieError(json.error);
+        } else if (json.success) {
+          setCookieSuccess(json.success);
+        }
+      } else {
+        setCookieError(cookie);
+      }
+    } else {
+      // const href = window.location.href;
+      const url = new URL(window.location.href);
+      const error = url.searchParams.get(name);
+      if (error) {
+        setCookieError(error);
+      }
+      window.history.replaceState(null, null, url.origin + url.pathname);
+    }
+
+    /*
+    const val = encodeURIComponent("This is an error message");
+    */
+  }, [name]);
+
+  const notice = error || cookieError || success || cookieSuccess;
+  useEffect(() => {
+    if (notice && ref.current) {
       ref.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [hasNotice]);
+  }, [notice, form.state]);
 
-  if (!hasNotice) {
+  if (!notice) {
     return null;
   }
-  let severity = error ? "error" : "success";
+  let severity = error || cookieError ? "error" : "success";
 
   return (
-    <Fade in={true}>
-      <Alert ref={ref} severity={severity} {...props}>
-        {error || success}
-      </Alert>
-    </Fade>
+    <Alert
+      ref={ref}
+      severity={severity}
+      sx={{ scrollMarginTop: "75px" }}
+      {...props}
+    >
+      {notice}
+    </Alert>
   );
+}
+
+function getCookie(name) {
+  const cookies = document.cookie.split(";");
+  const cookie = cookies.find((cookie) => cookie.trim().startsWith(name + "="));
+
+  if (cookie) {
+    const [, encoded] = cookie.split("=");
+    return decodeURIComponent(encoded);
+  }
+
+  return null;
 }

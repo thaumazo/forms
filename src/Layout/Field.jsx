@@ -1,16 +1,35 @@
-import { memo, useMemo } from "react";
+import React, { memo, useMemo } from "react";
 import sentenceCase from "../utils/sentenceCase";
 
-import { Grid } from "@mui/material";
-import pick from "lodash/pick";
-import TextField from "../TextField";
+import GridItem from "../Grid/Item";
 
-function Field({ field }) {
-  const gridProps = pick(field, ["lg", "md", "sm", "xl", "xs"]);
+import pick from "lodash/pick";
+import omit from "lodash/omit";
+import TextField from "..//TextField";
+import TextArea from "..//TextArea";
+import Password from "..//Password";
+import Checkbox from "..//Checkbox";
+import CheckboxList from "..//CheckboxList";
+import Radio from "..//Radio";
+import Select from "..//Select";
+import Slug from "../Slug";
+
+import gridPropsList from "./gridProps";
+
+function Field({ field = "text", ...props }) {
+  const gridProps = useMemo(() => {
+    let retval = pick(props, gridPropsList);
+
+    if (Object.keys(retval).length === 0) {
+      retval.md = 12;
+    }
+    return retval;
+  }, [props]);
 
   const fieldProps = useMemo(() => {
-    let retval = pick(field, [
-      "name",
+    let retval = omit(props, gridPropsList);
+    /*
+    pick(props, [
       "value",
       "label",
       "max",
@@ -20,18 +39,47 @@ function Field({ field }) {
       "required",
       "type",
     ]);
+    */
 
     if (!("label" in retval)) {
-      retval.label = sentenceCase(field.name);
+      retval.label = sentenceCase(retval.name);
     }
 
     return retval;
-  }, [field]);
-
+  }, [props]);
   return (
-    <Grid item {...gridProps}>
-      <TextField fullWidth {...fieldProps} />
-    </Grid>
+    <GridItem {...gridProps}>
+      {(() => {
+        if (typeof(field) === "function" || typeof(field) === "object") {
+          // const Lazy = React.lazy(field);
+          // return <Suspense><Lazy {...fieldProps}/></Suspense>;
+          const Field = field;
+          return <Field {...fieldProps} />;
+        }    
+
+        switch (field.toLowerCase()) {
+          case "text":
+          case "input":
+            return <TextField {...fieldProps} />;
+          case "textarea":
+            return <TextArea {...fieldProps} />;
+          case "password":
+            return <Password {...fieldProps} />;
+          case "checkbox":
+            return <Checkbox {...fieldProps} />;
+          case "checkboxlist":
+            return <CheckboxList {...fieldProps} />;
+          case "radio":
+            return <Radio {...fieldProps} />;
+          case "select":
+            return <Select {...fieldProps} />;
+          case "slug":
+            return <Slug {...fieldProps} />;
+          default:
+            throw Error("unknown field type: " + field);
+        }
+      })()}
+    </GridItem>
   );
 }
 

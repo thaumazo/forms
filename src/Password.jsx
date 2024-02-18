@@ -1,57 +1,54 @@
-
 import { useState, useCallback, forwardRef } from "react";
+
 import TextField from "./TextField";
-import IconButton from "@mui/material/IconButton";
-import InputAdornment from "@mui/material/InputAdornment";
 
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
+// import Visibility from "@mui/icons-material/VisibilityOutlined";
+// import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Visibility from "./icons/EyeIcon";
+import VisibilityOff from "./icons/EyeSlashIcon";
 
-const Password = forwardRef(
-  ({ pattern, message, name = "password", ...props }, ref) => {
-    pattern =
-      pattern ??
-      (props.matches ? undefined : "(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[\\S]{8,}");
-    message =
-      message ??
-      (props.matches
-        ? undefined
-        : "Must be at least 8 characters; include both big and small letters and a number.");
+import IconButton from "./IconButton";
 
-    const [showPassword, setShowPassword] = useState(false);
+const Password = (initialProps, ref) => {
+  const props = {
+    pattern: {
+      pattern: "(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[\\S]{8,}",
+      message:
+        "Must be at least 8 characters; include both big and small letters and a number.",
+    },
+    ...initialProps,
+  };
 
-    const handleClickShowPassword = useCallback(() => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = useCallback(
+    (evt) => {
+      evt.stopPropagation();
+      evt.preventDefault();
       setShowPassword(showPassword ? false : true);
-    }, [showPassword]);
+    },
+    [showPassword],
+  );
 
-    props.InputProps = {
-      endAdornment: (
-        <InputAdornment position="end">
-          <IconButton
-            size="medium"
-            tabIndex={-1}
-            aria-label="toggle password visibility"
-            onClick={handleClickShowPassword}
-            // onMouseDown={handleMouseDownPassword}
-          >
-            {showPassword ? <VisibilityOff /> : <Visibility />}
-          </IconButton>
-        </InputAdornment>
-      ),
-    };
+  const button = (
+    <IconButton type="button" tabIndex="-1" onClick={handleClickShowPassword}>
+      {showPassword ? (
+        <VisibilityOff width="1.5rem" height="1.5rem" />
+      ) : (
+        <Visibility width="1.5rem" height="1.5rem" />
+      )}
+    </IconButton>
+  );
 
-    return (
-      <TextField
-        pattern={pattern}
-        message={message}
-        name={name}
-        type={showPassword ? "text" : "password"}
-        ref={ref}
-        {...props}
-      />
-    );
-  },
-);
+  return (
+    <TextField
+      {...props}
+      type={showPassword ? "text" : "password"}
+      ref={ref}
+      end={button}
+    />
+  );
+};
 
-Password.displayName = "Password";
-export default Password;
+Password.displayName = "PasswordField";
+export default forwardRef(Password);

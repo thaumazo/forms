@@ -1,4 +1,3 @@
-
 import { useContext } from "react";
 import FormContext from "./Context";
 
@@ -12,5 +11,6 @@ export default function useForm() {
     );
   }
 
-  return context;
+  const { form } = context;
+  return form;
 }

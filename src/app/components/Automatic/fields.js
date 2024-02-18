@@ -6,11 +6,13 @@ const fields = {
     fields: {
       first_name: {
         required: true,
-        xs: 6, // grid spacing
+        placeholder: "Jane",
+        sm: 6, // grid spacing
       },
       last_name: {
         required: true,
-        xs: 6, // grid spacing
+        placeholder: "Doe",
+        sm: 6, // grid spacing
       },
     },
   },
@@ -19,6 +21,7 @@ const fields = {
     fields: {
       email: {
         type: "email",
+        placeholder: "name@example.com",
         required: true,
       },
       password: {
@@ -41,7 +44,7 @@ const fields = {
         label: "Pick one",
         required: true,
         field: "radio",
-        row: true, // put radio buttons in a row
+        row: "sm", // put radio buttons in a row at lg break point
         options: [
           [1, "Option one"],
           [2, "Option two"],
@@ -52,6 +55,19 @@ const fields = {
         label: "Select one",
         required: true,
         field: "select",
+        options: [
+          [1, "Option one"],
+          [2, "Option two"],
+          [3, "Option three"],
+          [4, "Option four"],
+          [5, "Option five"],
+          [6, "Option six"],
+        ],
+      },
+      checkboxList: {
+        label: "Which apply",
+        field: "checkboxList",
+        row: "sm",
         options: [
           [1, "Option one"],
           [2, "Option two"],

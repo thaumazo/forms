@@ -6,11 +6,7 @@ import styles from "./grid.module.scss";
 
 const gridProps = ["xs", "sm", "md", "lg", "xl"];
 
-export default function GridItem({
-  hideIfEmpty = false,
-  className,
-  ...props
-}) {
+export default function GridItem({ hideIfEmpty = false, className, ...props }) {
   const divProps = omit(props, gridProps);
 
   const classProp = useMemo(() => {
@@ -25,7 +21,7 @@ export default function GridItem({
       }
       return acc;
     }, []);
-    
+
     if (classes.length === 0) {
       classes.push(styles["xs-12"]);
     }

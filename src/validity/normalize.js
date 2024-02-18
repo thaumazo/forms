@@ -26,6 +26,8 @@ export default function normalize(info) {
           rules[key] = { field: value };
           break;
       }
+    } else if (typeof value === "object") {
+      rules[key] = value;
     }
   }
 
@@ -54,7 +56,12 @@ export default function normalize(info) {
     };
   }
 
-  if (
+  if (rules.pattern) {
+    rules.pattern = {
+      message: "This field does not match the specified pattern",
+      ...rules.pattern,
+    };
+  } else if (
     (info.type === "password" || info.field === "password") &&
     !info.matches
   ) {
@@ -63,13 +70,6 @@ export default function normalize(info) {
       message:
         "Must be at least 8 characters; include both big and small letters and a number.",
       ...(rules.pattern || {}),
-    };
-  }
-
-  if (rules.pattern) {
-    rules.pattern = {
-      message: "This field does not match the specified pattern",
-      ...rules.pattern,
     };
   }
 

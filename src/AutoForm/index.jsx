@@ -11,6 +11,7 @@ import Notice from "../Notice";
 
 import Submit from "../Submit";
 
+const empty = {};
 export default function AutoForm({
   action,
   values,
@@ -24,28 +25,29 @@ export default function AutoForm({
   onChange,
   onResponse,
   gap = "16px",
+  state = empty,
   children,
 }) {
   return (
-    <Provider action={action} values={values}>
+    <Provider state={state} action={action} values={values}>
       <Form onSubmit={onSubmit} onChange={onChange} onResponse={onResponse}>
         <Grid gap={gap}>
           {title && (
             <Item>
               {(() => {
                 let titleOptions = {
-                  variant: "h4", 
+                  variant: "h4",
                 };
 
-                if (typeof (title) === "string") {
+                if (typeof title === "string") {
                   titleOptions.children = title;
-                } else if (typeof(title) === "object") {
+                } else if (typeof title === "object") {
                   titleOptions = {
                     ...titleOptions,
                     ...title,
-                  }
+                  };
                 }
-               return <Typography {...titleOptions} />
+                return <Typography {...titleOptions} />;
               })()}
             </Item>
           )}
@@ -54,18 +56,18 @@ export default function AutoForm({
             <Item>
               {(() => {
                 let descriptionOptions = {
-                  variant: "subtitle1", 
+                  variant: "subtitle1",
                 };
 
-                if (typeof (description) === "string") {
+                if (typeof description === "string") {
                   descriptionOptions.children = description;
-                } else if (typeof(description) === "object") {
+                } else if (typeof description === "object") {
                   descriptionOptions.children = {
                     ...descriptionOptions,
                     ...description,
-                  }
+                  };
                 }
-               return <Typography {...descriptionOptions} />
+                return <Typography {...descriptionOptions} />;
               })()}
             </Item>
           )}
@@ -77,18 +79,21 @@ export default function AutoForm({
           <Item>
             {(() => {
               if (buttons) {
-                return buttons;
+                if (typeof buttons === "function") {
+                  return buttons();
+                } else {
+                  return buttons;
+                }
               }
 
-              let submitOptions = {}
-              if (typeof(submit) === "string") {
-                submitOptions.children = submit
-              } else if (typeof(submit) === "object") {
+              let submitOptions = {};
+              if (typeof submit === "string") {
+                submitOptions.children = submit;
+              } else if (typeof submit === "object") {
                 submitOptions = submit;
               }
- 
-              return <Submit {...submitOptions} />
 
+              return <Submit {...submitOptions} />;
             })()}
           </Item>
         </Grid>

@@ -65,7 +65,6 @@
     "./useDarkMode": "./dist/useDarkMode.js",
     "./utils/sentenceCase": "./dist/utils/sentenceCase.js"
   },
-  "type": "module",
   "dependencies": {
     "@babel/plugin-transform-react-jsx": "^7.22.15",
     "@babel/preset-env": "^7.22.20",
