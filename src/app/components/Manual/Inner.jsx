@@ -5,15 +5,13 @@ import Item from "../../../Grid/Item";
 
 //import { Grid } from "@mui/material";
 
-import {
-  TextField,
-  Password,
-  Checkbox,
-  Select,
-  Radio,
-  Submit,
-  Notice,
-} from "../../../index";
+import TextField from "../../../Input";
+import Password from "../../../Password";
+import Checkbox from "../../../Checkbox";
+import Select from "../../../Select";
+import Radio from "../../../Radio";
+import Submit from "../../../Submit";
+import Notice from "../../../Notice";
 
 const options = [
   ["first", "First"],

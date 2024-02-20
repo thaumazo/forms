@@ -5,7 +5,7 @@ import useField from "./useField";
 import Field from "./Field";
 import Input from "./base/Input";
 
-const TextField = ({ start, end, ...initialProps }, ref) => {
+const InputField = ({ start, end, ...initialProps }, ref) => {
   const field = useField(initialProps, ref);
 
   return (
@@ -48,5 +48,5 @@ const TextField = ({ start, end, ...initialProps }, ref) => {
   */
 };
 
-TextField.displayName = "TextField";
-export default forwardRef(TextField);
+InputField.displayName = "InputField";
+export default forwardRef(InputField);

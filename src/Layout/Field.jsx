@@ -5,13 +5,13 @@ import GridItem from "../Grid/Item";
 
 import pick from "lodash/pick";
 import omit from "lodash/omit";
-import TextField from "..//TextField";
-import TextArea from "..//TextArea";
-import Password from "..//Password";
-import Checkbox from "..//Checkbox";
-import CheckboxList from "..//CheckboxList";
-import Radio from "..//Radio";
-import Select from "..//Select";
+import InputField from "../Input";
+import TextArea from "../TextArea";
+import Password from "../Password";
+import Checkbox from "../Checkbox";
+import CheckboxList from "../CheckboxList";
+import Radio from "../Radio";
+import Select from "../Select";
 import Slug from "../Slug";
 
 import gridPropsList from "./gridProps";
@@ -60,7 +60,7 @@ function Field({ field = "text", ...props }) {
         switch (field.toLowerCase()) {
           case "text":
           case "input":
-            return <TextField {...fieldProps} />;
+            return <InputField {...fieldProps} />;
           case "textarea":
             return <TextArea {...fieldProps} />;
           case "password":
