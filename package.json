@@ -74,7 +74,8 @@
     "./useFieldSubscribe": "./dist/useFieldSubscribe.js",
     "./useForm": "./dist/useForm.js",
     "./utils/*": "./dist/utils/*.js",
-    "./validity/*": "./dist/validity/*.js"
+    "./validity/*": "./dist/validity/*.js",
+    "./global.css": "./dist/global.css"
   },
   "dependencies": {
     "@babel/plugin-transform-react-jsx": "^7.22.15",
