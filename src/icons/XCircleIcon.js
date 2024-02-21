@@ -32,4 +32,4 @@ function XCircleIcon({ title, titleId, ...props }, svgRef) {
   );
 }
 const ForwardRef = React.forwardRef(XCircleIcon);
-module.exports = ForwardRef;
+export default ForwardRef;

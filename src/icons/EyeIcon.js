@@ -39,4 +39,4 @@ function EyeIcon({ title, titleId, ...props }, svgRef) {
   );
 }
 const ForwardRef = React.forwardRef(EyeIcon);
-module.exports = ForwardRef;
+export default ForwardRef;

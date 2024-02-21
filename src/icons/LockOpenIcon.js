@@ -34,4 +34,4 @@ function LockOpenIcon({ title, titleId, ...props }, svgRef) {
   );
 }
 const ForwardRef = React.forwardRef(LockOpenIcon);
-module.exports = ForwardRef;
+export default ForwardRef;

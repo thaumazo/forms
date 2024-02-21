@@ -34,4 +34,4 @@ function EyeSlashIcon({ title, titleId, ...props }, svgRef) {
   );
 }
 const ForwardRef = React.forwardRef(EyeSlashIcon);
-module.exports = ForwardRef;
+export default ForwardRef;

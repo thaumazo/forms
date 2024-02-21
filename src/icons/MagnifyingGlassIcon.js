@@ -34,4 +34,4 @@ function MagnifyingGlassIcon({ title, titleId, ...props }, svgRef) {
   );
 }
 const ForwardRef = React.forwardRef(MagnifyingGlassIcon);
-module.exports = ForwardRef;
+export default ForwardRef;
