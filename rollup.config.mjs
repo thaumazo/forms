@@ -3,6 +3,7 @@
 // based on tutorial at:
 // https://blog.harveydelaney.com/creating-your-own-react-component-library/
 
+//import scss from 'rollup-plugin-scss';
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import resolve from "@rollup/plugin-node-resolve";
 // import commonjs from "@rollup/plugin-commonjs";
@@ -30,10 +31,13 @@ export default {
     {
       dir: "dist",
       // entryFileNames: '[name].js',
+      /*
       entryFileNames: (chunkInfo) => {
         const extension = chunkInfo.facadeModuleId.split('.').pop();
         return `${chunkInfo.name}.${extension}`;
       },
+      */
+      entryFileNames: '[name].js',
       format: "es",
       sourcemap: true,
       preserveModules: true,
@@ -50,6 +54,11 @@ export default {
     del({ targets: 'dist/*' }),
     peerDepsExternal(),
     // preserveDirectives({}),
+    /*
+    scss({
+      output: 'dist/bundle.css', 
+    }),
+    */
     resolve({
       extensions: [".mjs", ".js", ".json", ".node", ".jsx"],
     }),
@@ -60,7 +69,10 @@ export default {
       useTsconfigDeclarationDir: true 
     }),
     */
-    postcss(),
+    postcss({
+      modules: true,
+      extensions: ['.scss', '.css'],
+    }),
     babel({
       babelHelpers: "bundled",
       exclude: "node_modules/**",
