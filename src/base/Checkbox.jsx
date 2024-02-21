@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 
-import CheckIcon from "@heroicons/react/24/outline/CheckIcon";
+import CheckIcon from "../icons/CheckIcon";
 
 import styles from "../form.module.scss";
 
