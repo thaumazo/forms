@@ -71,6 +71,7 @@ export default {
     */
     postcss({
       modules: true,
+      extract: "form.css",
       extensions: ['.scss', '.css'],
     }),
     babel({
