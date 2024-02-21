@@ -24,6 +24,7 @@ export default {
     "src/Grid/index.jsx",
     "src/base/Search.jsx",
     "src/lib/formSchema.js",
+    "src/validity/checkServerValidity.js",
   ],
   output: [
     {
