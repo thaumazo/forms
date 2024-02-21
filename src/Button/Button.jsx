@@ -71,7 +71,7 @@ export default function Button({
   return (
     <Component type={type} className={classes} {...props}>
       {startIcon && <span className={styles.startIconSpan}>{startIcon}</span>}
-      {...children}
+      {children}
       {endIcon && <span className={styles.endIconSpan}>{endIcon}</span>}
     </Component>
   );
