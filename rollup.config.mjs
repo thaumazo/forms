@@ -39,7 +39,11 @@ export default {
       preserveModules: true,
       preserveModulesRoot: 'src', 
       sourcemap: true,
-      banner: () => '"use client";',
+      banner: (data) => {
+        if (data.fileName.match(/jsx$/)) {
+          return '"use client";';
+        }
+      },
     },
   ],
   plugins: [
