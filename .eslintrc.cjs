@@ -11,8 +11,7 @@ const config = {
   ],
   "rules": {
     "no-console": "error",
-   //  "import/no-unresolved": "error"
-
+    "import/no-unresolved": "error"
   },
   "settings": {
     "import/resolver": {

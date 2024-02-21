@@ -1,3 +1,5 @@
+// import preserveDirectives from "rollup-plugin-preserve-directives";
+
 // based on tutorial at:
 // https://blog.harveydelaney.com/creating-your-own-react-component-library/
 
@@ -13,15 +15,11 @@ import del from 'rollup-plugin-delete';
 
 export default {
   input: [
-    "src/",
-    "src/index.jsx",
-    /*
-    "src/Context.jsx",
-    "src/ThemeProvider.js",
-    "src/Provider.jsx",  
-    "src/Form.jsx",
-    "src/TextField.jsx"
-    */
+    "src/Alert/index.jsx",
+    "src/AutoForm/index.jsx",
+    // "src/Button/index.jsx",
+    // "src/*",
+    // "src/index.js",
   ],
   output: [
     {
@@ -42,6 +40,7 @@ export default {
   plugins: [
     del({ targets: 'dist/*' }),
     peerDepsExternal(),
+    // preserveDirectives({}),
     resolve({
       extensions: [".mjs", ".js", ".json", ".node", ".jsx"],
     }),
@@ -95,6 +94,11 @@ export default {
   ],
   onwarn: function(warning, warn) {
     // suppress the "default imported from external module" warnings
+
+    if (warning.code === "MODULE_LEVEL_DIRECTIVE") {
+      // get rid of warning on "use client" directive
+      return;
+    }
 
     if (
       warning.code === 'UNUSED_EXTERNAL_IMPORT' 
