@@ -69,6 +69,7 @@
     "./Submit": "./dist/Submit.jsx",
     "./TextArea": "./dist/TextArea.jsx",
     "./base/*": "./dist/base/*.jsx",
+    "./lib/*": "./dist/lib/*.js",
     "./useConfirm": "./dist/useConfirm.js",
     "./useField": "./dist/useField.js",
     "./useFieldSubscribe": "./dist/useFieldSubscribe.js",

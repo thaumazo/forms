@@ -23,6 +23,7 @@ export default {
     "src/Error/index.jsx",
     "src/Grid/index.jsx",
     "src/base/Search.jsx",
+    "src/lib/formSchema.js",
   ],
   output: [
     {
