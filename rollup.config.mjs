@@ -17,7 +17,11 @@ export default {
   input: [
     "src/Alert/index.jsx",
     "src/AutoForm/index.jsx",
-    // "src/Button/index.jsx",
+    "src/Button/index.jsx",
+    "src/Layout/index.jsx",
+    "src/Select/index.jsx",
+    "src/Error/index.jsx",
+    "src/Grid/index.jsx",
     // "src/*",
     // "src/index.js",
   ],
