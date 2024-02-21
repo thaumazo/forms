@@ -59,7 +59,7 @@
     "./IconButton": "./dist/IconButton.jsx",
     "./Input": "./dist/Input.jsx",
     "./Label": "./dist/Label.jsx",
-    "./Layout": "./dist/Layout/*.jsx",
+    "./Layout": "./dist/Layout/index.jsx",
     "./Notice": "./dist/Notice.jsx",
     "./Password": "./dist/Password.jsx",
     "./Provider": "./dist/Provider.jsx",

@@ -22,8 +22,7 @@ export default {
     "src/Select/index.jsx",
     "src/Error/index.jsx",
     "src/Grid/index.jsx",
-    // "src/*",
-    // "src/index.js",
+    "src/base/Search.jsx",
   ],
   output: [
     {
