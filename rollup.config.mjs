@@ -44,7 +44,11 @@ export default {
       preserveModulesRoot: 'src', 
       sourcemap: true,
       banner: (data) => {
-        if (data.fileName === "Provider.js") {
+        const clients = [
+          "Provider.js",
+          "AutoForm/index.js",
+        ];
+        if (clients.includes(data.fileName)) {
           return '"use client";';
         }
       },
