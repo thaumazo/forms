@@ -73,7 +73,6 @@ $breakpoints: (
   color: #1f2937;
   transition: background 0.5s;
 
-  @include placeholder;
 }
 
 @mixin input-dark {
@@ -106,7 +105,9 @@ $breakpoints: (
   input {
     appearance: none;
     width: 100%;
-    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    padding: 0.25rem 0.75rem;
     outline: none;
     background: none;
     border: none;
@@ -131,8 +132,10 @@ $breakpoints: (
   @include input;
   display: block;
   width: 100%;
-  padding: 0.5rem 0.75rem;
-  line-height: 1.25;
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: 0.25rem 0.75rem;
+  // line-height: 1.25;
 
   border-radius: 0.25rem;
 
