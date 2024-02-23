@@ -44,7 +44,7 @@ export default {
       preserveModulesRoot: 'src', 
       sourcemap: true,
       banner: (data) => {
-        if (data.fileName.match(/js|x$/)) {
+        if (data.fileName === "Provider.js") {
           return '"use client";';
         }
       },
