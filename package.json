@@ -54,6 +54,7 @@
     "./Error": "./dist/Error/index.js",
     "./Field": "./dist/Field.js",
     "./Form": "./dist/Form.js",
+    "./Grid": "./dist/Grid/index.js",
     "./Grid/*": "./dist/Grid/*.js",
     "./IconButton": "./dist/IconButton.js",
     "./Input": "./dist/Input.js",
