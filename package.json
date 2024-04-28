@@ -1,6 +1,6 @@
 {
   "name": "@thaumazo/forms",
-  "version": "0.3.3-canary.16",
+  "version": "0.3.3-canary.17",
   "description": "An extension of mui forms with additional features",
   "scripts": {
     "dev": "next dev",
