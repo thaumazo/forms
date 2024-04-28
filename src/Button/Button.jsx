@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, forwardRef } from "react";
 
 import styles from "./button.module.scss";
 
@@ -7,7 +7,7 @@ import styles from "./button.module.scss";
 const Spinner = lazy(() => import("@mui/icons-material/Autorenew"));
 
 
-export default function Button({
+const Button = ({
   loading = null,
   startIcon = null,
   endIcon = null,
@@ -17,9 +17,8 @@ export default function Button({
   color = null,
   component: Component = "button",
   ...props
-}) {
+}, ref) => {
   let classes = styles.button;
-
 
   if (loading === true || (loading === false && !startIcon) ) {
     if (loading === true) {
@@ -69,10 +68,14 @@ export default function Button({
   }
 
   return (
-    <Component type={type} className={classes} {...props}>
+    <Component type={type} className={classes} ref={ref} {...props}>
       {startIcon && <span className={styles.startIconSpan}>{startIcon}</span>}
       {children}
       {endIcon && <span className={styles.endIconSpan}>{endIcon}</span>}
     </Component>
   );
-}
+};
+
+Button.displayName = "Button";
+export default forwardRef(Button);
+
