@@ -39,13 +39,13 @@
     "rollup-plugin-scss": "^4.0.0"
   },
   "peerDependencies": {
-    "@emotion/react": ">=11.4.1",
-    "@emotion/styled": ">=11.3.0",
-    "@mui/icons-material": ">=5.14.9",
-    "@mui/material": ">=5.14.15",
-    "lodash": ">=4.17.21"
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0",
+    "@mui/icons-material": "^5.14.9",
+    "@mui/material": "^5.14.15",
+    "lodash": "^4.17.21"
   },
-  " exports": {
+  "exports": {
     "./Alert": "./dist/Alert/index.js",
     "./AutoForm": "./dist/AutoForm/index.js",
     "./Button": "./dist/Button/index.js",

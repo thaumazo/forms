@@ -245,18 +245,18 @@ $breakpoints: (
 }
 
 :global {
-  .autoTheme {
+  .system {
   }
-  .darkTheme {
+  .dark {
   }
 }
 
-:global(.darkTheme) {
+:global(.dark) {
   @include dark;
 }
 
 @media (prefers-color-scheme: dark) {
-  :global(.autoTheme) {
+  :global(.system) {
     @include dark;
   }
 }
