@@ -52,7 +52,18 @@ export default function Notice({ name, ...props }) {
   const notice = error || cookieError || success || cookieSuccess;
   useEffect(() => {
     if (notice && ref.current) {
-      ref.current.scrollIntoView({ behavior: "smooth" });
+      // ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      const computedStyles = window.getComputedStyle(document.body);  
+      const offset = parseFloat(computedStyles.paddingTop) + 10;
+
+      const scroll = ref.current.getBoundingClientRect().top - 
+          document.body.getBoundingClientRect().top - 
+          offset;   
+
+      window.scrollTo({
+        behavior: 'smooth',
+        top: scroll > 0 ? scroll : 0
+      });
     }
   }, [notice, form.state]);
 

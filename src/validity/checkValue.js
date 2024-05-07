@@ -1,7 +1,7 @@
 import normalize from "./normalize";
 import isEmail from "validator/es/lib/isEmail";
 
-import { GlobalFormState } from "../Provider";
+import GlobalFormState from "../lib/GlobalFormState";
 
 export default function checkValue(name, props, values) {
   const rules = normalize(props);

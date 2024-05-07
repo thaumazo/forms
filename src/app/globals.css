@@ -93,6 +93,7 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  padding-top: 50px;
 }
 
 a {
@@ -105,4 +106,18 @@ a {
     color-scheme: dark;
     font: Helvetica, sans-serif;
   }
+}
+
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  justify-content: center;
+
+  background: 
+  rgb(var(--background-end-rgb))
 }
