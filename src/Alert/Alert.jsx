@@ -2,7 +2,17 @@ import React, { forwardRef } from "react";
 
 import styles from "./alert.module.scss";
 
-function Alert({ severity = null, success = null, error = null, className, children, ...props }, ref) {
+function Alert(
+  {
+    severity = null,
+    success = null,
+    error = null,
+    className,
+    children,
+    ...props
+  },
+  ref,
+) {
   const classes = [styles.alert];
   if (className) {
     classes.push(className);
@@ -12,18 +22,18 @@ function Alert({ severity = null, success = null, error = null, className, child
   if (success) {
     severity = "success";
     if (!children) {
-      text = success; 
+      text = success;
     }
-  } else  if (error) {
+  } else if (error) {
     severity = "error";
     if (!children) {
-      text = error; 
+      text = error;
     }
-  } 
+  }
 
   switch (severity) {
     case "error":
-    default: 
+    default:
       classes.push(styles.error);
       break;
     case "success":

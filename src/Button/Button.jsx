@@ -6,28 +6,30 @@ import styles from "./button.module.scss";
 
 const Spinner = lazy(() => import("@mui/icons-material/Autorenew"));
 
-
-const Button = ({
-  loading = null,
-  startIcon = null,
-  endIcon = null,
-  className = null,
-  children,
-  type = "button",
-  color = null,
-  component: Component = "button",
-  ...props
-}, ref) => {
+const Button = (
+  {
+    loading = null,
+    startIcon = null,
+    endIcon = null,
+    className = null,
+    children,
+    type = "button",
+    color = null,
+    component: Component = "button",
+    ...props
+  },
+  ref,
+) => {
   let classes = styles.button;
 
-  if (loading === true || (loading === false && !startIcon) ) {
+  if (loading === true || (loading === false && !startIcon)) {
     if (loading === true) {
       props.disabled = true;
     }
     classes += " " + styles.loading;
     startIcon = (
       <Suspense>
-        <Spinner 
+        <Spinner
           className={styles.spinner}
           style={{ visibility: loading ? "visible" : "hidden" }}
         />
@@ -36,7 +38,7 @@ const Button = ({
   }
 
   if (loading !== null && !endIcon) {
-    endIcon = <span />
+    endIcon = <span />;
   }
 
   if (startIcon) {
@@ -78,4 +80,3 @@ const Button = ({
 
 Button.displayName = "Button";
 export default forwardRef(Button);
-

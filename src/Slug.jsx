@@ -11,17 +11,20 @@ import Field from "./Field";
 import Input from "./base/Input";
 
 const SlugField = ({ subscribe, onChange, ...props }, ref) => {
-  props.onChange = useCallback((evt) => {
-    evt.target.value = evt.target.value
-      .toLowerCase()
-      .replace(/\s+/g, "-") // replace spaces
-      .replace(/[^\w-]+/g, "") // remove not word characters
-      .replace(/--+/g, "-") // ensure only single hyphens
-    if (onChange) {
-      onChange(evt);
-    }
-    setInteracted(true);
-  }, [onChange]);
+  props.onChange = useCallback(
+    (evt) => {
+      evt.target.value = evt.target.value
+        .toLowerCase()
+        .replace(/\s+/g, "-") // replace spaces
+        .replace(/[^\w-]+/g, "") // remove not word characters
+        .replace(/--+/g, "-"); // ensure only single hyphens
+      if (onChange) {
+        onChange(evt);
+      }
+      setInteracted(true);
+    },
+    [onChange],
+  );
 
   props.onBlur = useCallback((evt, field) => {
     field.value = strToSlug(field.value);
@@ -42,21 +45,20 @@ const SlugField = ({ subscribe, onChange, ...props }, ref) => {
     field.value = strToSlug(title);
   }, [interacted, field.initialValue, locked, field, subscribedField.value]);
 
-
   return (
     <Field field={field}>
       <Input
         {...field.props}
         value={field.value}
         readOnly={locked}
-        end={<LockButton locked={locked} setLocked={setLocked}/>}
+        end={<LockButton locked={locked} setLocked={setLocked} />}
         ref={field.ref}
       />
     </Field>
   );
 };
 
-function LockButton({locked, setLocked}) {
+function LockButton({ locked, setLocked }) {
   if (locked) {
     return (
       <IconButton type="button" onClick={() => setLocked(false)}>

@@ -72,7 +72,6 @@ $breakpoints: (
   border: 1px solid #6b7280;
   color: #1f2937;
   transition: background 0.5s;
-
 }
 
 @mixin input-dark {
@@ -128,7 +127,8 @@ $breakpoints: (
   }
 }
 
-.input, .textArea {
+.input,
+.textArea {
   @include input;
   display: block;
   width: 100%;
@@ -229,7 +229,8 @@ $breakpoints: (
   .label {
     @include text-dark;
   }
-  .input, .textArea {
+  .input,
+  .textArea {
     @include input-dark;
   }
   .labelInput {

@@ -53,16 +53,27 @@ export default function Notice({ name, ...props }) {
   useEffect(() => {
     if (notice && ref.current) {
       // ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
-      const computedStyles = window.getComputedStyle(document.body);  
-      const offset = parseFloat(computedStyles.paddingTop) + 10;
+      const headers = document.getElementsByTagName("header");
+      const header = headers.length ? headers.item(0) : false;
+      // const offset = parseFloat(computedStyles.paddingTop) + 10;
 
-      const scroll = ref.current.getBoundingClientRect().top - 
-          document.body.getBoundingClientRect().top - 
-          offset;   
+      let offset = 10;
+      if (header) {
+        const computedStyles = window.getComputedStyle(header);
+        if (computedStyles.position === "fixed") {
+          const rect = header.getBoundingClientRect();
+          offset += rect.height;
+        }
+      }
+
+      const scroll =
+        ref.current.getBoundingClientRect().top -
+        document.body.getBoundingClientRect().top -
+        offset;
 
       window.scrollTo({
-        behavior: 'smooth',
-        top: scroll > 0 ? scroll : 0
+        behavior: "smooth",
+        top: scroll > 0 ? scroll : 0,
       });
     }
   }, [notice, form.state]);

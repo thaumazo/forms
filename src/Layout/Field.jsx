@@ -50,12 +50,12 @@ function Field({ field = "text", ...props }) {
   return (
     <GridItem {...gridProps}>
       {(() => {
-        if (typeof(field) === "function" || typeof(field) === "object") {
+        if (typeof field === "function" || typeof field === "object") {
           // const Lazy = React.lazy(field);
           // return <Suspense><Lazy {...fieldProps}/></Suspense>;
           const Field = field;
           return <Field {...fieldProps} />;
-        }    
+        }
 
         switch (field.toLowerCase()) {
           case "text":
