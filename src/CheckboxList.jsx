@@ -15,14 +15,13 @@ export default function CheckboxList(props) {
 
   return (
     <Field field={field}>
-      <ul className={row ? (styles["radioRow" + row] || null) : styles.radioList }>
+      <ul className={row ? styles["radioRow" + row] || null : styles.radioList}>
         {options.map(([value, label], key) => {
           const id = field.props.id + "-" + value;
           value = String(value);
           return (
-            <li>
+            <li key={value}>
               <Checkbox
-                key={value}
                 row={row}
                 name={name /*+ "[]"*/}
                 value={value}

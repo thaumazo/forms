@@ -15,13 +15,12 @@ export default function RadioField(props) {
 
   return (
     <Field field={field}>
-      <ul className={row ? (styles["radioRow" + row] || null) : styles.radioList }>
+      <ul className={row ? styles["radioRow" + row] || null : styles.radioList}>
         {options.map(([_value, _label], key) => {
           const id = field.props.id + "-" + _value;
           return (
-            <li>
+            <li key={_value}>
               <Radio
-                key={_value}
                 row={row}
                 value={_value}
                 ref={key === 0 ? inputRef : undefined}

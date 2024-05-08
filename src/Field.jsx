@@ -20,7 +20,6 @@ export default function Field({ field, ...props }) {
     classes += className;
   }
 
-  console.log(classes);
   return (
     <div className={classes}>
       {label && (

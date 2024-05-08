@@ -60,7 +60,10 @@ export default function Notice({ name, ...props }) {
       let offset = 10;
       if (header) {
         const computedStyles = window.getComputedStyle(header);
-        if (computedStyles.position === "fixed" || computedStyles.position === "sticky") {
+        if (
+          computedStyles.position === "fixed" ||
+          computedStyles.position === "sticky"
+        ) {
           const rect = header.getBoundingClientRect();
           offset += rect.height;
         }
