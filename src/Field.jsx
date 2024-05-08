@@ -14,12 +14,13 @@ export default function Field({ field, ...props }) {
 
   let classes = styles.field;
   if (required) {
-    classes += styles.required;
+    classes += " " + styles.required;
   }
   if (className) {
     classes += className;
   }
 
+  console.log(classes);
   return (
     <div className={classes}>
       {label && (

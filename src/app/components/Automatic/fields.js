@@ -67,7 +67,7 @@ const fields = {
       checkboxList: {
         label: "Which apply",
         field: "checkboxList",
-        row: "sm",
+        // row: "sm",
         options: [
           [1, "Option one"],
           [2, "Option two"],

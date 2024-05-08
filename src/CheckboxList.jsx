@@ -15,25 +15,27 @@ export default function CheckboxList(props) {
 
   return (
     <Field field={field}>
-      <div className={styles["radioRow" + row] || null}>
+      <ul className={row ? (styles["radioRow" + row] || null) : styles.radioList }>
         {options.map(([value, label], key) => {
           const id = field.props.id + "-" + value;
           value = String(value);
           return (
-            <Checkbox
-              key={value}
-              row={row}
-              name={name /*+ "[]"*/}
-              value={value}
-              ref={key === 0 ? inputRef : undefined}
-              {...rest}
-              id={id}
-              checked={field?.value.includes(value)}
-              label={label}
-            />
+            <li>
+              <Checkbox
+                key={value}
+                row={row}
+                name={name /*+ "[]"*/}
+                value={value}
+                ref={key === 0 ? inputRef : undefined}
+                {...rest}
+                id={id}
+                checked={field?.value.includes(value)}
+                label={label}
+              />
+            </li>
           );
         })}
-      </div>
+      </ul>
     </Field>
   );
 }

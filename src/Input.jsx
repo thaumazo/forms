@@ -19,33 +19,6 @@ const InputField = ({ start, end, ...initialProps }, ref) => {
       />
     </Field>
   );
-  /*
-  const input = (
-    <input
-      type="text"
-      {...field.props}
-      className={start || end ? null : styles.input}
-      value={field.value}
-      ref={field.ref}
-    />
-  );
-
-  return (
-    <div className={styles.field}>
-      <Label field={field} className={styles.mb} />
-      {start || end ? (
-        <label className={styles.labelInput}>
-          {start && <span className={styles.start}>{start}</span>}
-          {input}
-          {end && <span className={styles.end}>{end}</span>}
-        </label>
-      ) : (
-        input
-      )}
-      <Error field={field} />
-    </div>
-  );
-  */
 };
 
 InputField.displayName = "InputField";

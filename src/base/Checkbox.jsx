@@ -6,11 +6,7 @@ import styles from "../form.module.scss";
 
 function Checkbox({ label, id, row, ...props }, ref) {
   return (
-    <div
-      className={
-        styles.flex + " " + styles.flexWra + " " + styles["option" + row] || ""
-      }
-    >
+    <div className={styles.flex + " " + styles.flexWrap}>
       <label className={styles.checkbox}>
         <input {...props} id={id} type="checkbox" ref={ref} />
         <span>

@@ -39,7 +39,9 @@ $breakpoints: (
 }
 
 .field {
+  display: block;
 }
+
 
 .label {
   display: inline-block;
@@ -160,6 +162,16 @@ $breakpoints: (
   padding-right: 2.75rem;
 }
 */
+
+.radioList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
 .radioRow {
 }
 @each $breakpoint, $width in $breakpoints {
@@ -167,6 +179,10 @@ $breakpoints: (
     .radioRow#{$breakpoint} {
       display: flex;
       gap: 1.5rem;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+
     }
   }
 }
@@ -175,8 +191,8 @@ $breakpoints: (
 .radio {
   position: relative;
   display: flex;
-  padding: 0.75rem;
-  margin-left: -0.75rem;
+  padding: 0.4rem;
+  margin: -0.4rem;
   align-items: center;
   border-radius: 9999px;
   cursor: pointer;
@@ -212,6 +228,11 @@ $breakpoints: (
     }
     */
   }
+}
+
+.checkbox + .label, .radio + .label {
+  margin-left: .75rem;
+
 }
 
 .radio {
