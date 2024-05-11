@@ -205,11 +205,11 @@ $breakpoints: (
     border-radius: 0.125rem;
   }
 
-  input:checked + span {
+  input:checked + .check{
     opacity: 1;
   }
 
-  span {
+  .check {
     position: absolute;
     color: white;
     transition: opacity 0.3s;

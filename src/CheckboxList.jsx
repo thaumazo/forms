@@ -13,6 +13,9 @@ export default function CheckboxList(props) {
 
   let { row = false, options = [], name, ...rest } = field.props;
 
+  // fix client side validation as not designed to work with lists of checkboxes.
+  delete rest.required;
+
   return (
     <Field field={field}>
       <ul className={row ? styles["radioRow" + row] || null : styles.radioList}>
@@ -22,7 +25,7 @@ export default function CheckboxList(props) {
           return (
             <li key={value}>
               <Checkbox
-                row={row}
+                // row={row}
                 name={name /*+ "[]"*/}
                 value={value}
                 ref={key === 0 ? inputRef : undefined}

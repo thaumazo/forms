@@ -68,18 +68,19 @@ const fields = {
         label: "Which apply",
         field: "checkboxList",
         // row: "sm",
+        required: true,
         options: [
           [1, "Option one"],
           [2, "Option two"],
           [3, "Option three"],
         ],
       },
-      privacy: {
-        label: "I agree to the privacy policy",
-        field: "checkbox",
-        required: true,
-      },
     },
+  },
+  privacy: {
+    label: "I agree to the privacy policy",
+    field: "checkbox",
+    required: true,
   },
   toggleValidity: {
     field: ToggleValidity,

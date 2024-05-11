@@ -4,14 +4,12 @@ import CheckIcon from "../icons/CheckIcon";
 
 import styles from "../form.module.scss";
 
-function Checkbox({ label, id, row, ...props }, ref) {
+function Checkbox({ label, id, ...props }, ref) {
   return (
     <div className={styles.flex + " " + styles.flexWrap}>
       <label className={styles.checkbox}>
         <input {...props} id={id} type="checkbox" ref={ref} />
-        <span>
-          <CheckIcon width="0.874rem" height="0.874rem" />
-        </span>
+        <CheckIcon className={styles.check} width="0.874rem" height="0.874rem" />
       </label>
       {label && (
         <label htmlFor={id} className={styles.label}>
