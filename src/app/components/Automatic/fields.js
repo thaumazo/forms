@@ -46,9 +46,9 @@ const fields = {
         field: "radio",
         row: "sm", // put radio buttons in a row at lg break point
         options: [
-          [1, "Option one"],
-          [2, "Option two"],
-          [3, "Option three"],
+          ["1", "Option one"],
+          ["2", "Option two"],
+          ["3", "Option three"],
         ],
       },
       select: {
@@ -56,12 +56,12 @@ const fields = {
         required: true,
         field: "select",
         options: [
-          [1, "Option one"],
-          [2, "Option two"],
-          [3, "Option three"],
-          [4, "Option four"],
-          [5, "Option five"],
-          [6, "Option six"],
+          ["1", "Option one"],
+          ["2", "Option two"],
+          ["3", "Option three"],
+          ["4", "Option four"],
+          ["5", "Option five"],
+          ["6", "Option six"],
         ],
       },
       checkboxList: {
@@ -70,9 +70,9 @@ const fields = {
         // row: "sm",
         required: true,
         options: [
-          [1, "Option one"],
-          [2, "Option two"],
-          [3, "Option three"],
+          ["1", "Option one"],
+          ["2", "Option two"],
+          ["3", "Option three"],
         ],
       },
     },

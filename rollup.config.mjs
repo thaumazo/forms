@@ -19,6 +19,7 @@ export default {
     "src/Alert/index.jsx",
     "src/AutoForm/index.jsx",
     "src/Button/index.jsx",
+    "src/Email/index.jsx",
     "src/Layout/index.jsx",
     "src/Select/index.jsx",
     "src/Error/index.jsx",
