@@ -1,27 +1,39 @@
-import { Html } from '@react-email/html';
+import { Html } from "@react-email/html";
 
-import { 
-  Tailwind,
+import {
   Body,
   Container,
   // Heading,
   // Text,
-} from '@react-email/components';
+} from "@react-email/components";
 
 import Auto from "./Auto";
 
-export default  function Email({ fields, formData }) {
+export default function Email({ fields, formData }) {
   return (
     <Html lang="en">
-      <Tailwind>
-
-        <Body className="font-sans bg-white my-auto mx-auto font-sans">
-          <Container className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] w-[465px]">
-            <Auto fields={fields} formData={formData}/> 
-          </Container>
-        </Body>
-      </Tailwind>
+      <Body
+        style={{
+          fontFamily: "sans-serif",
+          backgroundColor: "white",
+          margin: "auto",
+        }}
+      >
+        <Container
+          style={{
+            border: "1px solid #eaeaea",
+            borderRadius: "4px",
+            marginTop: "40px",
+            marginBottom: "40px",
+            marginLeft: "auto",
+            marginRight: "auto",
+            padding: "20px",
+            width: "465px",
+          }}
+        >
+          <Auto fields={fields} formData={formData} />
+        </Container>
+      </Body>
     </Html>
   );
-
 }

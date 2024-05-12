@@ -169,20 +169,18 @@ $breakpoints: (
   list-style-type: none;
   padding: 0;
   margin: 0;
+
+  @each $breakpoint, $width in $breakpoints {
+    @media (min-width: $width) {
+      &.radioRow#{$breakpoint} {
+        flex-direction: row;
+        gap: 1.5rem;
+      }
+    }
+  }
 }
 
 .radioRow {
-}
-@each $breakpoint, $width in $breakpoints {
-  @media (min-width: $width) {
-    .radioRow#{$breakpoint} {
-      display: flex;
-      gap: 1.5rem;
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-    }
-  }
 }
 
 .checkbox,
@@ -205,7 +203,7 @@ $breakpoints: (
     border-radius: 0.125rem;
   }
 
-  input:checked + .check{
+  input:checked + .check {
     opacity: 1;
   }
 

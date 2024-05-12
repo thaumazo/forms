@@ -18,7 +18,13 @@ export default function CheckboxList(props) {
 
   return (
     <Field field={field}>
-      <ul className={row ? styles["radioRow" + row] || null : styles.radioList}>
+      <ul
+        className={
+          styles.radioList +
+          " " +
+          (row ? styles["radioRow" + row] || styles.radioRowxs : "")
+        }
+      >
         {options.map(([value, label], key) => {
           const id = field.props.id + "-" + value;
           value = String(value);

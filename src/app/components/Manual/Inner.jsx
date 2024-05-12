@@ -53,6 +53,7 @@ export default function ManualFormInner() {
           <Radio row name="radio" label="Radio" options={options} />
         </Item>
       </Grid>
+      <br />
       <Submit />
     </>
   );
