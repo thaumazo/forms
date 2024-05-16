@@ -59,6 +59,9 @@ const Button = (
     case "error":
       classes += " " + styles.error;
       break;
+    case "cancel":
+      classes += " " + styles.cancel;
+      break;
   }
 
   if (endIcon) {
