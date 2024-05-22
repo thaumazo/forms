@@ -9,7 +9,7 @@ export default function GridContainer({
   gap,
   ...props
 }) {
-  const classProp = (className ? " " : "") + grid.container;
+  const classProp = (className ? className + " " : "") + grid.container;
   const styleProps = useMemo(
     () => ({ ...styles, "--grid-gap": gap }),
     [styles, gap],
