@@ -4,7 +4,6 @@ import Grid from "../Grid";
 import Item from "../Grid/Item";
 
 import Provider from "../Provider";
-import Typography from "@mui/material/Typography";
 import Form from "../Form";
 import Layout from "../Layout";
 import Notice from "../Notice";
@@ -47,7 +46,7 @@ export default function AutoForm({
                     ...title,
                   };
                 }
-                return <Typography {...titleOptions} />;
+                return <h2 {...titleOptions} />;
               })()}
             </Item>
           )}
@@ -67,7 +66,7 @@ export default function AutoForm({
                     ...description,
                   };
                 }
-                return <Typography {...descriptionOptions} />;
+                return <div {...descriptionOptions} />;
               })()}
             </Item>
           )}
