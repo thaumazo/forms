@@ -1,9 +1,9 @@
 import { lazy, Suspense, forwardRef } from "react";
 
 import styles from "./button.module.scss";
+import omit from "lodash/omit";
 
 //const Spinner = lazy(() => import("./Spinner"));
-
 const Spinner = lazy(() => import("@mui/icons-material/Autorenew"));
 
 const Button = (
@@ -39,6 +39,12 @@ const Button = (
 
   if (loading !== null && !endIcon) {
     endIcon = <span />;
+  }
+
+  // get same appearance as :disabled when not a button
+  if (props.disabled && Component !== "button") {
+    classes += " " + styles.disabled;
+    props = omit(props, ["href", "onClick", "disabled"]);
   }
 
   if (startIcon) {

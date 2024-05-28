@@ -1,5 +1,7 @@
 "use client";
 
+import React from "react";
+
 import Grid from "../Grid";
 import Item from "../Grid/Item";
 
@@ -34,6 +36,13 @@ export default function AutoForm({
           {title && (
             <Item>
               {(() => {
+                if (React.isValidElement(title)) {
+                  return title;
+                } else if (typeof title === "string") {
+                  return <h2>{title}</h2>;
+                }
+
+                /*
                 let titleOptions = {
                   variant: "h4",
                 };
@@ -47,6 +56,7 @@ export default function AutoForm({
                   };
                 }
                 return <h2 {...titleOptions} />;
+                */
               })()}
             </Item>
           )}
@@ -54,6 +64,13 @@ export default function AutoForm({
           {description && (
             <Item>
               {(() => {
+                if (React.isValidElement(description)) {
+                  return description;
+                } else if (typeof description === "string") {
+                  return <p>{description}</p>;
+                }
+
+                /*
                 let descriptionOptions = {
                   variant: "subtitle1",
                 };
@@ -67,6 +84,7 @@ export default function AutoForm({
                   };
                 }
                 return <div {...descriptionOptions} />;
+                */
               })()}
             </Item>
           )}

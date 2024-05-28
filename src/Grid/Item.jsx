@@ -10,7 +10,7 @@ export default function GridItem({ hideIfEmpty = false, className, ...props }) {
   const divProps = omit(props, gridProps);
 
   const classProp = useMemo(() => {
-    let gridClasses = className ? className + " "  :  "";
+    let gridClasses = className ? className + " " : "";
     let classes = gridProps.reduce((acc, key) => {
       if (props[key]) {
         let name = `${key}-${props[key]}`;

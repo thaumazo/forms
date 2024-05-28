@@ -19,6 +19,9 @@
     "@babel/plugin-transform-react-jsx": "^7.22.15",
     "@babel/preset-env": "^7.22.20",
     "@babel/preset-react": "^7.22.15",
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0",
+    "@mui/material": "^5.15.17",
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-commonjs": "^25.0.4",
     "@rollup/plugin-node-resolve": "^15.2.1",
@@ -38,9 +41,6 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-preserve-directives": "^0.4.0",
-    "@emotion/styled": "^11.3.0",
-    "@emotion/react": "^11.4.1",
-    "@mui/material": "^5.15.17",
     "rollup-plugin-scss": "^4.0.0"
   },
   "peerDependencies": {
